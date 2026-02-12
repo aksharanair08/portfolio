@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshara Nair | UI/UX Designer</title>
+    <meta name="description" content="Portfolio of Akshara Nair - UI/UX Designer crafting intuitive digital experiences">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: '#1a1a1a',
+                        secondary: '#666666',
+                        accent: '#d4a574',
+                        cream: '#faf9f6',
+                        sage: '#87a878',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #1a1a1a;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+            mix-blend-mode: difference;
+        }
+        
+        @media (max-width: 768px) {
+            .custom-cursor {
+                display: none;
+            }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #1a1a1a;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .sticky-nav {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Profile picture – hero (circular, accent ring, soft shadow) */
+        .profile-hero-wrap { --profile-size: clamp(120px, 20vw, 180px); }
+        .profile-hero-frame {
+            width: var(--profile-size);
+            height: var(--profile-size);
+            padding: 4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4a574 0%, #87a878 100%);
+            box-shadow: 0 20px 40px rgba(26, 26, 26, 0.12), 0 0 0 1px rgba(212, 165, 116, 0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .profile-hero-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+        /* Profile picture – about (rounded card with accent border) */
+        .profile-about-frame {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 3px solid rgba(212, 165, 116, 0.4);
+            box-shadow: 0 25px 50px -12px rgba(26, 26, 26, 0.15);
+            background: #faf9f6;
+        }
+        .profile-about-img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-cream text-primary antialiased overflow-x-hidden">
+
+    <div class="custom-cursor hidden md:block" id="cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="#hero" class="font-serif text-2xl font-bold tracking-tight hover:text-accent transition-colors">
+                AN.
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#work" class="nav-link text-sm font-medium tracking-wide uppercase">Work</a>
+                <a href="#about" class="nav-link text-sm font-medium tracking-wide uppercase">About</a>
+                <a href="#services" class="nav-link text-sm font-medium tracking-wide uppercase">Services</a>
+                <a href="#contact" class="nav-link text-sm font-medium tracking-wide uppercase">Contact</a>
+            </div>
+            
+            <button class="md:hidden" id="mobile-menu-btn">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden fixed inset-0 bg-cream z-40 transform translate-x-full transition-transform duration-300" id="mobile-menu">
+            <div class="flex flex-col items-center justify-center h-full gap-8">
+                <a href="#work" class="mobile-link font-serif text-3xl">Work</a>
+                <a href="#about" class="mobile-link font-serif text-3xl">About</a>
+                <a href="#services" class="mobile-link font-serif text-3xl">Services</a>
+                <a href="#contact" class="mobile-link font-serif text-3xl">Contact</a>
+                <button class="absolute top-6 right-6" id="close-menu">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="fade-in">
+                <div class="profile-hero-wrap mb-8 flex justify-center">
+                    <div class="profile-hero-frame">
+                        <div class="w-full h-full rounded-full bg-cream flex items-center justify-center">
+                            <span class="font-serif font-bold text-3xl md:text-4xl tracking-tight text-primary">AN.</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-sm md:text-base uppercase tracking-[0.3em] text-secondary mb-6">UI/UX Designer, UX Architect & Analyst</p>
+                <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8">
+                    Designing<br>
+                    <span class="text-accent italic">User Experiences</span> Through Research, Strategy, and Analysis
+                </h1>
+                <p class="text-lg md:text-xl text-secondary max-w-2xl mx-auto mb-12 leading-relaxed">
+                    I design intuitive interfaces and meaningful user experiences that bridge the gap between human needs and business goals.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#work" class="bg-primary text-white px-8 py-4 rounded-full font-medium hover:bg-secondary transition-all duration-300 flex items-center gap-2 group">
+                        View My Work
+                        <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
+                    </a>
+                    <a href="#contact" class="border border-primary px-8 py-4 rounded-full font-medium hover:bg-primary hover:text-white transition-all duration-300">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Selected Work -->
+    <section id="work" class="py-20 md:py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 fade-in">
+                <div>
+                    <p class="text-sm uppercase tracking-[0.2em] text-secondary mb-2">Portfolio</p>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold">Selected Work</h2>
+                </div>
+                <p class="text-secondary mt-4 md:mt-0 max-w-md">A curated collection of projects showcasing user-centered design solutions across various industries.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                <!-- Project 1 -->
+                <a href="case-study-nova-finance.html" class="project-card group cursor-pointer fade-in block">
+                    <div class="relative overflow-hidden rounded-2xl mb-6 aspect-[4/3]">
+                        <img src="public/av/interface.png" alt="Autonomous Vehicle Interface Design" class="w-full h-full object-cover transition-transform duration-700">
+                        <div class="project-overlay absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="text-white font-medium tracking-wide">View Case Study</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-serif text-2xl font-semibold mb-2">User Interface in Autonomous Vehicles</h3>
+                            <p class="text-secondary text-sm">Trust in AVs - Interface Design</p>
+                        </div>
+                        <span class="text-xs uppercase tracking-wider text-sage border border-sage px-3 py-1 rounded-full">Automotive</span>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="case-study-mindful.html" class="project-card group cursor-pointer fade-in md:mt-16 block">
+                    <div class="relative overflow-hidden rounded-2xl mb-6 aspect-[4/3]">
+                        <img src="http://static.photos/wellness/1024x768/2" alt="Wellness Platform" class="w-full h-full object-cover transition-transform duration-700">
+                        <div class="project-overlay absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="text-white font-medium tracking-wide">View Case Study</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-serif text-2xl font-semibold mb-2">Mindful</h3>
+                            <p class="text-secondary text-sm">Mental Health Platform</p>
+                        </div>
+                        <span class="text-xs uppercase tracking-wider text-sage border border-sage px-3 py-1 rounded-full">Healthcare</span>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="case-study-saffron.html" class="project-card group cursor-pointer fade-in block">
+                    <div class="relative overflow-hidden rounded-2xl mb-6 aspect-[4/3]">
+                        <img src="http://static.photos/food/1024x768/3" alt="Restaurant Branding" class="w-full h-full object-cover transition-transform duration-700">
+                        <div class="project-overlay absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="text-white font-medium tracking-wide">View Case Study</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-serif text-2xl font-semibold mb-2">Saffron</h3>
+                            <p class="text-secondary text-sm">Restaurant Booking Experience</p>
+                        </div>
+                        <span class="text-xs uppercase tracking-wider text-accent border border-accent px-3 py-1 rounded-full">Hospitality</span>
+                    </div>
+                </a>
+
+                <!-- Project 4 -->
+                <a href="case-study-ev-flow.html" class="project-card group cursor-pointer fade-in md:mt-16 block">
+                    <div class="relative overflow-hidden rounded-2xl mb-6 aspect-[4/3]">
+                        <img src="public/ev-flow/Prototype%20Introduction.png" alt="EV-Flow — EV charging app design" class="w-full h-full object-cover transition-transform duration-700">
+                        <div class="project-overlay absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center">
+                            <span class="text-white font-medium tracking-wide">View Case Study</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-serif text-2xl font-semibold mb-2">EV-Flow</h3>
+                            <p class="text-secondary text-sm">EV Charging Station App Design</p>
+                        </div>
+                        <span class="text-xs uppercase tracking-wider text-sage border border-sage px-3 py-1 rounded-full">App Design</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="text-center mt-16 fade-in">
+                <button class="inline-flex items-center gap-2 text-primary font-medium hover:text-accent transition-colors border-b-2 border-primary hover:border-accent pb-1">
+                    View All Projects
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 md:py-32 bg-white px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+                <div class="fade-in order-2 md:order-1">
+                    <div class="relative profile-about-wrap">
+                        <div class="profile-about-frame">
+                            <img src="public/ProfilePic.webp" alt="Akshara Nair" class="profile-about-img">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 bg-cream p-6 rounded-2xl shadow-xl hidden md:block">
+                            <p class="font-serif text-4xl font-bold text-accent">5+</p>
+                            <p class="text-sm text-secondary">Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in order-1 md:order-2">
+                    <p class="text-sm uppercase tracking-[0.2em] text-secondary mb-4">About Me</p>
+                    <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6">Designing with Purpose & Passion</h2>
+                    <div class="space-y-6 text-secondary leading-relaxed mb-8">
+                        <figure class="border-l-4 border-accent pl-4 md:pl-6">
+                            <blockquote class="font-serif text-xl md:text-2xl italic text-primary">
+                                “Great design starts with listening.”
+                            </blockquote>
+                        </figure>
+                        <p>
+                            I’m a UI/UX designer who listens deeply to users—their challenges and the moments that matter most. I enjoy turning complex problems into simple, intuitive experiences that feel natural to use.
+                        </p>
+                        <p>
+                            My goal is to create designs that not only look good, but genuinely make people’s lives easier.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="px-4 py-2 bg-cream rounded-full text-sm font-medium">User Research</span>
+                        <span class="px-4 py-2 bg-cream rounded-full text-sm font-medium">Wireframing</span>
+                        <span class="px-4 py-2 bg-cream rounded-full text-sm font-medium">Prototyping</span>
+                        <span class="px-4 py-2 bg-cream rounded-full text-sm font-medium">Design Systems</span>
+                        <span class="px-4 py-2 bg-cream rounded-full text-sm font-medium">Brand Strategy</span>
+                    </div>
+
+                    <a href="#contact" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-secondary transition-all duration-300">
+                        Let's Work Together
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-20 md:py-32 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-sm uppercase tracking-[0.2em] text-secondary mb-4">What I Do</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold">Services</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="fade-in p-8 bg-white rounded-2xl border border-gray-100 hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="w-14 h-14 bg-cream rounded-full flex items-center justify-center mb-6 group-hover:bg-accent transition-colors duration-300">
+                        <i data-lucide="layout" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold mb-4">UI Design</h3>
+                    <p class="text-secondary leading-relaxed mb-6">
+                        Creating visually stunning interfaces that align with your brand while ensuring usability and accessibility standards.
+                    </p>
+                    <ul class="space-y-2 text-sm text-secondary">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Design Systems</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Visual Design</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Responsive Design</li>
+                    </ul>
+                </div>
+
+                <div class="fade-in p-8 bg-white rounded-2xl border border-gray-100 hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="w-14 h-14 bg-cream rounded-full flex items-center justify-center mb-6 group-hover:bg-accent transition-colors duration-300">
+                        <i data-lucide="users" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold mb-4">UX Research</h3>
+                    <p class="text-secondary leading-relaxed mb-6">
+                        Understanding your users through research to inform design decisions and create products that truly resonate.
+                    </p>
+                    <ul class="space-y-2 text-sm text-secondary">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> User Interviews</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Usability Testing</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Journey Mapping</li>
+                    </ul>
+                </div>
+
+                <div class="fade-in p-8 bg-white rounded-2xl border border-gray-100 hover:shadow-xl transition-shadow duration-300 group">
+                    <div class="w-14 h-14 bg-cream rounded-full flex items-center justify-center mb-6 group-hover:bg-accent transition-colors duration-300">
+                        <i data-lucide="smartphone" class="w-6 h-6 text-primary"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-semibold mb-4">Prototyping</h3>
+                    <p class="text-secondary leading-relaxed mb-6">
+                        Bringing ideas to life with interactive prototypes that allow for testing and iteration before development.
+                    </p>
+                    <ul class="space-y-2 text-sm text-secondary">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> High-fidelity Prototypes</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Interaction Design</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-accent"></i> Micro-interactions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-primary text-white px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="fade-in">
+                    <p class="font-serif text-4xl md:text-5xl font-bold text-accent mb-2">50+</p>
+                    <p class="text-sm uppercase tracking-wider text-gray-400">Projects Completed</p>
+                </div>
+                <div class="fade-in" style="transition-delay: 100ms">
+                    <p class="font-serif text-4xl md:text-5xl font-bold text-accent mb-2">30+</p>
+                    <p class="text-sm uppercase tracking-wider text-gray-400">Happy Clients</p>
+                </div>
+                <div class="fade-in" style="transition-delay: 200ms">
+                    <p class="font-serif text-4xl md:text-5xl font-bold text-accent mb-2">5</p>
+                    <p class="text-sm uppercase tracking-wider text-gray-400">Years Experience</p>
+                </div>
+                <div class="fade-in" style="transition-delay: 300ms">
+                    <p class="font-serif text-4xl md:text-5xl font-bold text-accent mb-2">12</p>
+                    <p class="text-sm uppercase tracking-wider text-gray-400">Awards Won</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-32 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="fade-in">
+                <p class="text-sm uppercase tracking-[0.2em] text-secondary mb-4">Get in Touch</p>
+                <h2 class="font-serif text-4xl md:text-6xl font-bold mb-6">Let's Create Something<br>Beautiful Together</h2>
+                <p class="text-secondary text-lg mb-12 max-w-2xl mx-auto">
+                    Have a project in mind? I'd love to hear about it. Let's discuss how we can work together to bring your vision to life.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                    <a href="mailto:hello@aksharanair.com" class="inline-flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-full font-medium hover:bg-secondary transition-all duration-300 text-lg">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                        hello@aksharanair.com
+                    </a>
+                    <a href="public/AKSHARA_NAIR_CV_2026%20(2).pdf" download class="inline-flex items-center justify-center gap-3 border-2 border-primary text-primary px-8 py-4 rounded-full font-medium hover:bg-primary hover:text-white transition-all duration-300 text-lg">
+                        <i data-lucide="download" class="w-5 h-5"></i>
+                        Download CV
+                    </a>
+                </div>
+
+                <div class="flex justify-center gap-6">
+                    <a href="https://www.linkedin.com/in/nair-akshara/" target="_blank" rel="noopener noreferrer" class="w-12 h-12 rounded-full bg-cream flex items-center justify-center hover:bg-accent hover:text-white transition-all duration-300">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 rounded-full bg-cream flex items-center justify-center hover:bg-accent hover:text-white transition-all duration-300">
+                        <i data-lucide="dribbble" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 rounded-full bg-cream flex items-center justify-center hover:bg-accent hover:text-white transition-all duration-300">
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 rounded-full bg-cream flex items-center justify-center hover:bg-accent hover:text-white transition-all duration-300">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-secondary">© 2024 Akshara Nair. All rights reserved.</p>
+            <div class="flex gap-6 text-sm text-secondary">
+                <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Custom cursor
+        const cursor = document.getElementById('cursor');
+        
+        if (window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX - 10 + 'px';
+                cursor.style.top = e.clientY - 10 + 'px';
+            });
+
+            document.querySelectorAll('a, button, .project-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'scale(2)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'scale(1)';
+                });
+            });
+        }
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('sticky-nav');
+            } else {
+                navbar.classList.remove('sticky-nav');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Mobile menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('translate-x-full');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

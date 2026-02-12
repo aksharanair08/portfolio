@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Interface in Autonomous Vehicles | Akshara Nair</title>
+    <meta name="description" content="Case study: Cultivating Trust Between Young Drivers and Autonomous Vehicles Through User-Centered Design.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
+                    colors: { primary: '#1a1a1a', secondary: '#666666', accent: '#d4a574', cream: '#faf9f6', sage: '#87a878', brown: '#8B4513' }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-primary antialiased overflow-x-hidden" style="background-color: #FFFFFF;">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 transition-all duration-300 sticky-nav" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-2xl font-bold tracking-tight hover:text-accent transition-colors">AN.</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html#work" class="nav-link text-sm font-medium tracking-wide uppercase">Work</a>
+                <a href="index.html#about" class="nav-link text-sm font-medium tracking-wide uppercase">About</a>
+                <a href="index.html#services" class="nav-link text-sm font-medium tracking-wide uppercase">Services</a>
+                <a href="index.html#contact" class="nav-link text-sm font-medium tracking-wide uppercase">Contact</a>
+            </div>
+            <a href="index.html#work" class="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Work
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <!-- First Section: Interface Design for AV's -->
+            <section class="mb-20 md:mb-32">
+                <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                    <!-- Left side: Heading and Content -->
+                    <div>
+                        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                            INTERFACE DESIGN FOR AV'S
+                        </h1>
+                        <p class="text-lg md:text-xl text-secondary leading-relaxed">
+                            Trust in AVs - Cultivating Trust Between Young Drivers and Autonomous Vehicles Through User-Centered Design
+                        </p>
+                    </div>
+                    
+                    <!-- Right side: Image -->
+                    <div class="order-first md:order-last">
+                        <figure class="rounded-2xl overflow-hidden">
+                            <img src="public/av/interface.png" alt="Autonomous Vehicle Interface Design" class="w-full h-auto object-cover">
+                        </figure>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About the Project & Design Challenge Section -->
+            <section class="mb-20 md:mb-32">
+                <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
+                    <!-- Left Column: About the Project -->
+                    <div>
+                        <h2 class="font-serif text-2xl md:text-3xl font-bold mb-8 text-primary">
+                            About the Project
+                        </h2>
+                        <div class="space-y-6 text-secondary leading-relaxed text-base md:text-lg">
+                            <p>
+                                To foster trust, it's important to consider insights from research papers. One of the research papers highlights the significance of addressing human-related factors, such as driver fatigue and poor health, which contribute to 75% of traffic accidents. To mitigate these risks, an innovative approach is recommended, which includes features such as automatic vehicle speed control through an autonomous braking system, sleepiness detection, and driver health monitoring. This can enhance safety and prevent errors.
+                            </p>
+                            <p>
+                                Another research paper, which used traffic microsimulation and the surrogate safety assessment model, revealed that AVs can result in a substantial 12% reduction in the annual crash rate. This highlights the potential for AVs to significantly improve overall road safety. Additionally, a study emphasized on the importance of user-centric design elements, including aesthetics and usability, in shaping trust and distrust in AV systems.
+                            </p>
+                            <p>
+                                Positive user experiences, driven by pragmatic quality, need fulfillment, and aesthetic appeal, play a crucial role in fostering trust. In summary, a holistic design approach that prioritizes safety features, user-friendly interfaces, and aesthetic appeal is necessary to build trust among young drivers in embracing autonomous technology.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column: Design Challenge -->
+                    <div class="p-8 md:p-10 rounded-2xl border-l-4 border-accent shadow-sm" style="background-color: #FFFFFF;">
+                        <div class="mb-6">
+                            <span class="text-xs uppercase tracking-[0.2em] text-accent font-semibold mb-2 block">
+                                Design Challenge
+                            </span>
+                        </div>
+                        <p class="font-serif text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-primary">
+                            How might we cultivate trust between Young Drivers and Autonomous Vehicles?
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Recap Section (full-width) -->
+        <section class="mb-20 md:mb-32" style="background-color: #FFFFFF;">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-[1fr_1.5fr] gap-12 md:gap-16 items-center">
+                    <!-- Left side: Recap heading -->
+                    <div>
+                        <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-primary">
+                            Recap
+                        </h2>
+                    </div>
+                    
+                    <!-- Right side: Recap image -->
+                    <div>
+                        <figure class="rounded-2xl overflow-hidden shadow-none">
+                            <img src="public/av/recap.png" alt="Recap: Users, Interviews, Mapping, and Secondary Research" class="w-full h-auto object-cover shadow-none">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Define & Personas Section -->
+        <section class="mb-20 md:mb-32 pt-8 md:pt-12">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+                    <!-- Left Column: Define -->
+                    <div>
+                        <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6 text-primary">
+                            Define
+                        </h2>
+                        <div class="space-y-6 text-secondary leading-relaxed mb-8">
+                            <p>
+                                During the data analysis phase, we used Miro to visually organize codes into color-coded categories that emerged as key study themes.
+                            </p>
+                            <p>
+                                "Factors Influencing Driving Ability" included distractions, multiple passengers, sleep patterns, eyesight issues, stress-related crashes, and external conditions affecting performance. "Safety Concerns with AVs" highlighted mistrust in braking, skepticism about auto-detection, and doubts about alerts, especially in low visibility. "Driving Behavior" revealed insights into speed control, emotion regulation, and risky tendencies. "New Safety Features" captured preferences for communication tools, voice alerts, warnings, and SOS options in autonomous vehicles. Finally, "Driving Experience" addressed concerns about adverse conditions, night driving, and overall driving encounters.
+                            </p>
+                            <p>
+                                This structured approach provided nuanced insights to inform further research and design decisions.
+                            </p>
+                        </div>
+                        <figure class="rounded-2xl overflow-hidden shadow-none">
+                            <img src="public/av/define.png" alt="Define: Data analysis visualization with color-coded categories" class="w-full h-auto shadow-none">
+                        </figure>
+                    </div>
+                    
+                    <!-- Right Column: Personas -->
+                    <div class="pt-0 md:pt-[4.5rem]">
+                        <h2 class="font-serif text-4xl md:text-5xl font-bold mb-6 text-primary">
+                            Personas
+                        </h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <figure class="rounded-2xl overflow-hidden shadow-none">
+                                <img src="public/av/persona1.png" alt="Persona 1" class="w-full h-auto shadow-none">
+                            </figure>
+                            <figure class="rounded-2xl overflow-hidden shadow-none">
+                                <img src="public/av/persona2.png" alt="Persona 2" class="w-full h-auto shadow-none">
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ideation - Crazy 8s Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold mb-8 text-primary">
+                    Ideation – Crazy 8s
+                </h2>
+                <div class="space-y-6 text-secondary leading-relaxed mb-10 max-w-4xl">
+                    <p>
+                        With this scenario in mind, we identified common concerns among users, we crafted insight statements, and formulated "How might we" statements to distill these concerns into concrete problem statements. For each problem statement, we brainstormed design solutions using the Crazy 8s method. For a total of eight minutes, each team member generated eight designs averaging about a minute per design. Encouraging each team member to rapidly sketch various ideas as potential solutions to these problem statements.
+                    </p>
+                    <p>
+                        Next, each team member chose several favorites to present to the group as possible solutions to our design challenge. Following the sketching phase, a comprehensive discussion ensued, during which we evaluated and ranked the ideas through a voting process. This collaborative approach allowed us to pinpoint and select the most promising solutions for addressing our defined problem statements. The final refined ideas for addressing user concerns about Autonomous Vehicles (AVs) center around communication, reliability, and assistance, which can be further categorized into Infotainment and Mobile Application features.
+                    </p>
+                </div>
+                <figure class="rounded-2xl overflow-hidden shadow-none mb-16">
+                    <img src="public/av/ideation.png" alt="Ideation: Communication and Reliability concepts" class="w-full h-auto shadow-none">
+                </figure>
+
+                <p class="font-serif text-xl md:text-2xl font-semibold text-primary mb-8">
+                    Our project aims to build trust in young drivers using this two-fold approach. Our proposed design solutions are:
+                </p>
+                <div class="space-y-8">
+                    <div class="border-l-4 border-accent pl-6 py-1">
+                        <h3 class="font-serif text-lg font-bold text-primary mb-3">Delayed Transition and Clear Communication</h3>
+                        <p class="text-secondary leading-relaxed">
+                            Recognizing the challenges posed by heavy snowfall, the infotainment system communicates with the driver and our system proactively alerts the driver to assume manual control. A prominent visual alert, accompanied by an audio cue, signals the imminent need for intervention. To emphasize urgency, a countdown timer is displayed, highlighting the remaining time before manual control becomes necessary. In the event the driver fails to take charge, the AI co-pilot intervenes, guiding the vehicle to a secure location and prioritizing safety.
+                        </p>
+                    </div>
+                    <div class="border-l-4 border-accent pl-6 py-1">
+                        <h3 class="font-serif text-lg font-bold text-primary mb-3">Optional HUD and Hands-Free Commands</h3>
+                        <p class="text-secondary leading-relaxed">
+                            Implementing an optional Heads-Up Display (HUD) screen that projects essential information directly into the driver's field of vision, eliminating the need to divert attention. The optional nature of this feature gives users greater control, allowing them to choose whether or not to use it based on personal preferences. Our design further integrates hands-free commands, granting users the flexibility to enable the Heads-Up Display (HUD) effortlessly at any moment. This intuitive approach empowers users to choose the specific information they wish to view, enabling navigation directions or HUD with a simple voice command.
+                        </p>
+                    </div>
+                    <div class="border-l-4 border-accent pl-6 py-1">
+                        <h3 class="font-serif text-lg font-bold text-primary mb-3">Optimized Assistive Features</h3>
+                        <p class="text-secondary leading-relaxed">
+                            Leveraging an AI co-pilot to analyze the driver's travel history and saved data, offering personalized route recommendations and suggestions for a more tailored and efficient driving experience. This approach aims to enhance the overall assistive capabilities of the AV system. In addition, the infotainment system offers ‘Custom modes’ where users can easily store and apply preferred settings for various aspects such as seat position, climate control, music, lighting, apps, and volume. This can be accomplished through a single voice command, providing users with a seamless and personalized driving experience.
+                        </p>
+                    </div>
+                    <div class="border-l-4 border-accent pl-6 py-1">
+                        <h3 class="font-serif text-lg font-bold text-primary mb-3">Build Network</h3>
+                        <p class="text-secondary leading-relaxed">
+                            Developing a user-friendly mobile app driven by community interaction and feedback. This app allows users to access and share vehicle efficiency and statistical data, including trip history and essential statistics. By establishing a network that encourages collaboration and data sharing, the goal is to build trust among young drivers using automated vehicles.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Infotainment Features Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <p class="font-serif text-2xl md:text-3xl font-bold text-primary flex flex-wrap items-center gap-x-3">
+                    <span>Infotainment Features :</span>
+                    <span class="text-secondary font-normal text-lg md:text-xl">Audio & Visual alerts</span>
+                    <span class="text-primary font-medium">·</span>
+                    <span class="text-secondary font-normal text-lg md:text-xl">AI assistive co-pilot</span>
+                    <span class="text-primary font-medium">·</span>
+                    <span class="text-secondary font-normal text-lg md:text-xl">Ambient lighting changes</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- App Features Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-[auto_1fr] gap-8 md:gap-12 items-start">
+                    <h2 class="font-serif text-2xl md:text-3xl font-bold text-primary">
+                        App Features :
+                    </h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <figure class="rounded-2xl overflow-hidden shadow-none text-center">
+                            <img src="public/av/statistical.png" alt="Statistical data" class="w-full h-auto shadow-none">
+                            <figcaption class="mt-2 font-medium text-primary">Statistical data</figcaption>
+                        </figure>
+                        <figure class="rounded-2xl overflow-hidden shadow-none text-center">
+                            <img src="public/av/vehicle.png" alt="Vehicle efficiency" class="w-full h-auto shadow-none">
+                            <figcaption class="mt-2 font-medium text-primary">Vehicle efficiency</figcaption>
+                        </figure>
+                        <figure class="rounded-2xl overflow-hidden shadow-none text-center">
+                            <img src="public/av/route.png" alt="Optimized route suggestions" class="w-full h-auto shadow-none">
+                            <figcaption class="mt-2 font-medium text-primary">Optimized route suggestions</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ideation & Sketching Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mb-12">
+                    Ideation & Sketching
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <img src="public/av/sketch1.png" alt="Sketch 1 - Delayed transition and clear communication" class="w-full h-auto shadow-none">
+                    </figure>
+                    <div>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-primary mb-4">
+                            Delayed transition and Clear Communication:
+                        </h3>
+                        <p class="text-secondary leading-relaxed">
+                            Infotainment system alerts driver through messages, tones, and lights, which offers a grace period to act and moving to a safe spot. AI co-pilot enhances user interaction.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class="order-2 md:order-1">
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-primary mb-4">
+                            Assistive features - Custom Mode
+                        </h3>
+                        <p class="text-secondary leading-relaxed">
+                            Easily store and pick your preferred settings for seat position, climate control, music, lighting, apps, volume, and more, all through a single voice command.
+                        </p>
+                    </div>
+                    <figure class="rounded-2xl overflow-hidden shadow-none order-1 md:order-2">
+                        <img src="public/av/sketch2.png" alt="Sketch 2 - Assistive features Custom Mode" class="w-full h-auto shadow-none">
+                    </figure>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Optimized Assistive Features & Build Network Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-12">
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <img src="public/av/sketch3.png" alt="Sketch 3 - Optimized assistive features" class="w-full h-auto shadow-none">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none flex justify-center">
+                        <img src="public/av/sketch4.png" alt="Sketch 4 - Build network app concept" class="max-w-sm w-full h-auto shadow-none">
+                    </figure>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+                    <div>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-primary mb-4">
+                            Optimized Assistive Features:
+                        </h3>
+                        <p class="text-secondary leading-relaxed">
+                            The AI co-pilot provides route recommendations by analyzing the driver's travel history and saved data. This creates personalized guidance and suggestions for a more tailored and efficient driving experience.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-primary mb-4">
+                            Build network:
+                        </h3>
+                        <p class="text-secondary leading-relaxed">
+                            Create a user-friendly mobile app driven by community interaction and feedback, offering access to vehicle data, trip history, and essential statistics to establish trust among young drivers using automated vehicles.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prototyping Methods Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mb-12">
+                    Prototyping methods
+                </h2>
+                <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-stretch">
+                    <div class="flex flex-col">
+                        <figure class="rounded-2xl overflow-hidden shadow-none mb-4 aspect-[4/3] flex-shrink-0">
+                            <img src="public/av/low.png" alt="Low fidelity paper sketching" class="w-full h-full object-cover shadow-none">
+                        </figure>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-primary mb-2">
+                            LOW FIDELITY PROTOTYPING
+                        </h3>
+                        <p class="text-secondary">Paper sketching</p>
+                    </div>
+                    <div class="flex flex-col">
+                        <figure class="rounded-2xl overflow-hidden shadow-none mb-4 aspect-[4/3] flex-shrink-0">
+                            <img src="public/av/interface.png" alt="High fidelity Figma prototype" class="w-full h-full object-cover shadow-none">
+                        </figure>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-primary mb-2">
+                            HIGH FIDELITY PROTOTYPING
+                        </h3>
+                        <p class="text-secondary mb-4">Figma</p>
+                        <p class="text-secondary leading-relaxed">
+                            Interaction for the Infotainment system and Mobile application was done to showcase our designs effectively.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testing Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+                    <div>
+                        <h2 class="font-serif text-2xl md:text-3xl font-bold text-primary mb-6">
+                            Testing: whom did we test?
+                        </h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <figure class="rounded-2xl overflow-hidden shadow-none text-center">
+                                <img src="public/av/primary.png" alt="Primary users" class="w-full h-auto shadow-none">
+                                <figcaption class="mt-2 text-sm font-semibold text-primary uppercase tracking-wide">PRIMARY USERS</figcaption>
+                            </figure>
+                            <figure class="rounded-2xl overflow-hidden shadow-none text-center">
+                                <img src="public/av/age.png" alt="Secondary users" class="w-full h-auto shadow-none">
+                                <figcaption class="mt-2 text-sm font-semibold text-primary uppercase tracking-wide">SECONDARY USERS</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="font-serif text-2xl md:text-3xl font-bold text-primary mb-6">
+                            Testing: What did we test?
+                        </h2>
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="font-serif text-lg font-bold text-primary mb-2">LOW FIDELITY:</h3>
+                                <p class="text-secondary leading-relaxed">
+                                    We conducted internal testing to determine the optimal layout.
+                                </p>
+                            </div>
+                            <div>
+                                <h3 class="font-serif text-lg font-bold text-primary mb-2">HIGH FIDELITY:</h3>
+                                <p class="text-secondary leading-relaxed">
+                                    Verified the operational capabilities, user-friendliness, and layout efficiency.
+                                </p>
+                                <p class="text-secondary leading-relaxed mt-2">
+                                    Evaluated the design of both the infotainment system and the app to determine which played a greater role in fostering trust.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prototyping Iteration Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mb-10">
+                    Prototyping Iteration – Low fidelity
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+                    <div class="grid grid-cols-2 gap-4">
+                        <figure class="rounded-2xl overflow-hidden shadow-none">
+                            <img src="public/av/iteration1.png" alt="Iteration 1" class="w-full h-auto shadow-none">
+                        </figure>
+                        <figure class="rounded-2xl overflow-hidden shadow-none">
+                            <img src="public/av/iteration2.png" alt="Iteration 2" class="w-full h-auto shadow-none">
+                        </figure>
+                        <figure class="rounded-2xl overflow-hidden shadow-none">
+                            <img src="public/av/iteration3.png" alt="Iteration 3" class="w-full h-auto shadow-none">
+                        </figure>
+                    </div>
+                    <div class="p-6 md:p-8 rounded-2xl pt-10 md:pt-16 md:mt-8" style="background-color: #f5f5f5;">
+                        <div class="space-y-6 text-secondary leading-relaxed">
+                            <p>
+                                At the end of the ideation and sketching phase, our key features had been identified and the next phase was to build out the prototypes and test our ideas. Our approach was contingent on the fact that we would be testing these features outside of an actual AV. It was imperative to simulate the feeling of being in an AV, performing driving and non-driving tasks in a level 3 AV particularly while using the infotainment functions. Our prototype iterations can be divided into three phases: Low-fidelity, high-fidelity, and iterated high-fidelity prototypes.
+                            </p>
+                            <p>
+                                To begin with, we first developed low-fidelity prototypes that employed the use of sketches to convey the layout and features in both the infotainment screen and the mobile application. This step helped us decide which layouts and features work best in the proposed solutions. We tested multiple layouts and conducted within-team discussions to come to a consensus before moving to high-fidelity prototypes.
+                            </p>
+                            <p>
+                                Next, we developed high-fidelity prototypes, our high-fidelity screens were built with the Figma platform.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prototyping Iteration - ALERTS Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mb-10">
+                    Prototyping Iteration – ALERTS
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <div class="aspect-[2/1] overflow-hidden">
+                            <img src="public/av/iteration4.png" alt="Initial alert screen for driver to take over controls from AV" class="w-full h-full object-cover object-top shadow-none">
+                        </div>
+                        <figcaption class="mt-3 text-secondary leading-relaxed">
+                            Initial alert screen for driver to take over controls from AV.
+                        </figcaption>
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <div class="aspect-[16/9] overflow-hidden">
+                            <img src="public/av/interface.png" alt="Iterated alert screen for driver to take over controls from AV" class="w-full h-full object-cover shadow-none">
+                        </div>
+                        <figcaption class="mt-3 text-secondary leading-relaxed">
+                            Iterated alert screen for driver to take over controls from AV.
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prototyping Iteration - CUSTOM MODES Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mb-10">
+                    Prototyping Iteration – CUSTOM MODES
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 mb-12">
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <div class="aspect-[2/1] overflow-hidden">
+                            <img src="public/av/iteration50.png" alt="Initial prototype - split screen navigation and custom modes" class="w-full h-full object-cover object-top shadow-none">
+                        </div>
+                        <figcaption class="mt-3 text-secondary leading-relaxed">
+                            Initial prototype shows a split screen between navigation and custom modes.
+                        </figcaption>
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <div class="aspect-[2/1] overflow-hidden">
+                            <img src="public/av/iteration5.png" alt="Iteration - full screen custom modes" class="w-full h-full object-cover object-top shadow-none">
+                        </div>
+                        <figcaption class="mt-3 text-secondary leading-relaxed">
+                            Iteration shows a complete full screen dedicated to custom modes and individual aspects that make up the modes. As well as an option to save changes.
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12">
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <div class="aspect-[2/1] overflow-hidden">
+                            <img src="public/av/iteration6.png" alt="Initial prototype - split screen navigation and seat adjustments" class="w-full h-full object-cover object-top shadow-none">
+                        </div>
+                        <figcaption class="mt-3 text-secondary leading-relaxed">
+                            Initial prototype shows a split screen with navigation on one side and seat adjustments on the other. It shows only driver seating.
+                        </figcaption>
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <div class="aspect-[2/1] overflow-hidden">
+                            <img src="public/av/iteration7.png" alt="Iterated prototype - dedicated seat adjustments screen" class="w-full h-full object-cover object-top shadow-none">
+                        </div>
+                        <figcaption class="mt-3 text-secondary leading-relaxed">
+                            Iterated prototype has a dedicated screen for seat adjustments. Split into driver's seat and passenger's seat.
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobile App Prototype Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mb-10">
+                    Mobile App Prototype
+                </h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 md:gap-8">
+                    <figure class="rounded-2xl overflow-hidden shadow-none flex justify-center bg-gray-50/50">
+                        <img src="public/av/mobile1.png" alt="Mobile app screen 1" class="w-full h-auto max-h-[520px] object-contain shadow-none">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none flex justify-center bg-gray-50/50">
+                        <img src="public/av/mobile2.png" alt="Mobile app screen 2" class="w-full h-auto max-h-[520px] object-contain shadow-none">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none flex justify-center bg-gray-50/50">
+                        <img src="public/av/mobile3.png" alt="Mobile app screen 3" class="w-full h-auto max-h-[520px] object-contain shadow-none">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none flex justify-center bg-gray-50/50">
+                        <img src="public/av/mobile4.png" alt="Mobile app screen 4" class="w-full h-auto max-h-[520px] object-contain shadow-none">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none flex justify-center bg-gray-50/50">
+                        <img src="public/av/mobile5.png" alt="Mobile app screen 5" class="w-full h-auto max-h-[520px] object-contain shadow-none">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testing Methods Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mb-10">
+                    Testing Methods
+                </h2>
+                <div class="grid md:grid-cols-2 gap-10 md:gap-12">
+                    <div class="p-6 md:p-8 rounded-2xl border-l-4 border-accent" style="background-color: #fafafa;">
+                        <h3 class="font-serif text-xl font-bold text-primary mb-4">QUANTITATIVE ANALYSIS</h3>
+                        <ul class="text-secondary leading-relaxed space-y-2">
+                            <li>15 survey questions</li>
+                            <li>1–5 Likert scale questions and a few open-ended questions to gather accurate information</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 md:p-8 rounded-2xl border-l-4 border-accent" style="background-color: #fafafa;">
+                        <h3 class="font-serif text-xl font-bold text-primary mb-4">QUALITATIVE ANALYSIS</h3>
+                        <p class="text-secondary leading-relaxed">Think aloud testing</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="mb-20 md:mb-32">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-primary mb-10">
+                    Results
+                </h2>
+
+                <div class="p-6 md:p-8 rounded-2xl mb-12" style="background-color: #f5f5f5;">
+                    <h3 class="font-serif text-lg font-bold text-primary mb-4">What improvements or additional features would you suggest for both the infotainment interface and the mobile application?</h3>
+                    <ul class="grid sm:grid-cols-2 gap-2 text-secondary leading-relaxed list-disc list-inside space-y-1">
+                        <li>Gesture Control</li>
+                        <li>Mixed Reality Navigation</li>
+                        <li>An inside view into the driving software decision-making process</li>
+                        <li>Emergency and SOS Phone Numbers</li>
+                        <li>Road Assistance anywhere in the country, and multiple device car tracking</li>
+                        <li>Remote Control Features</li>
+                        <li>Personalized Notifications and Alerts</li>
+                        <li>Information on the availability and locations of nearby EV charging points, at a lower cost on the app</li>
+                    </ul>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <img src="public/av/results1.png" alt="Survey: Most valuable infotainment features" class="w-full h-auto shadow-none">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <img src="public/av/results2.png" alt="Survey: Usefulness of voice control for infotainment" class="w-full h-auto shadow-none">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <img src="public/av/results3.png" alt="Survey: Most useful mobile application features" class="w-full h-auto shadow-none">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <img src="public/av/results4.png" alt="Survey: UI design rating of mobile application" class="w-full h-auto shadow-none">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden shadow-none">
+                        <img src="public/av/results5.png" alt="Survey: Trust when using both infotainment and mobile app" class="w-full h-auto shadow-none">
+                    </figure>
+                </div>
+
+                <div class="border-l-4 border-accent pl-6 py-2">
+                    <h3 class="font-serif text-lg font-bold text-primary mb-3">Summary</h3>
+                    <p class="text-secondary leading-relaxed">
+                        The survey shows a strong preference for customizable modes and robust audio-visual alerts, highlighting the value users place on personalization and safety. The vehicle statistics feature in the mobile app was seen as particularly useful, reflecting interest in real-time vehicle data. 70% of users believe combining the infotainment system and mobile app is most effective, suggesting a synergistic approach builds trust in autonomous vehicle technology. The overall UI design of infotainment systems received high satisfaction (5/5), indicating positive reception of current designs.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Back to work -->
+            <section class="pt-8 border-t border-gray-200">
+                <a href="index.html#work" class="inline-flex items-center gap-2 text-primary font-medium hover:text-accent transition-colors border-b-2 border-primary hover:border-accent pb-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to All Projects
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="py-8 px-6 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-secondary">© 2024 Akshara Nair. All rights reserved.</p>
+            <a href="index.html#contact" class="text-sm text-secondary hover:text-primary transition-colors">Get in Touch</a>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

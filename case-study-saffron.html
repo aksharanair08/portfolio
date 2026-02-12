@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saffron — Restaurant Booking Experience | Akshara Nair</title>
+    <meta name="description" content="Case study: Saffron restaurant branding and booking experience redesign.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
+                    colors: { primary: '#1a1a1a', secondary: '#666666', accent: '#d4a574', cream: '#faf9f6', sage: '#87a878' }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-cream text-primary antialiased overflow-x-hidden">
+
+    <nav class="fixed w-full top-0 z-50 transition-all duration-300 sticky-nav" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-2xl font-bold tracking-tight hover:text-accent transition-colors">AN.</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html#work" class="nav-link text-sm font-medium tracking-wide uppercase">Work</a>
+                <a href="index.html#about" class="nav-link text-sm font-medium tracking-wide uppercase">About</a>
+                <a href="index.html#services" class="nav-link text-sm font-medium tracking-wide uppercase">Services</a>
+                <a href="index.html#contact" class="nav-link text-sm font-medium tracking-wide uppercase">Contact</a>
+            </div>
+            <a href="index.html#work" class="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Work
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <header class="mb-16">
+                <span class="text-xs uppercase tracking-wider text-accent border border-accent px-3 py-1 rounded-full">Hospitality</span>
+                <h1 class="font-serif text-4xl md:text-6xl font-bold mt-4 mb-4">Saffron</h1>
+                <p class="text-xl text-secondary">Restaurant Booking Experience</p>
+                <p class="text-secondary mt-6 max-w-2xl leading-relaxed">
+                    Brand identity and end-to-end booking experience for a premium restaurant group, from discovery to reservation and post-dining engagement.
+                </p>
+            </header>
+
+            <figure class="rounded-2xl overflow-hidden mb-16 shadow-xl">
+                <img src="http://static.photos/food/1024x768/3" alt="Saffron restaurant branding" class="w-full h-auto object-cover aspect-video">
+            </figure>
+
+            <section class="mb-16">
+                <h2 class="font-serif text-2xl font-bold mb-6">Overview</h2>
+                <p class="text-secondary leading-relaxed mb-4">
+                    Saffron is a growing restaurant group known for seasonal menus and warm service. They needed a cohesive brand and a seamless reservation flow that reflected their premium positioning without feeling stuffy. The project spanned brand guidelines, website, and a dedicated booking experience.
+                </p>
+                <p class="text-secondary leading-relaxed">
+                    We aimed to capture the warmth of dining at Saffron—rich tones, elegant typography, and a booking flow that felt like an invitation rather than a form.
+                </p>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="font-serif text-2xl font-bold mb-6">The Challenge</h2>
+                <ul class="space-y-3 text-secondary leading-relaxed list-disc list-inside">
+                    <li>Unifying multiple locations under one brand with distinct personality</li>
+                    <li>Reducing no-shows and last-minute cancellations through better UX</li>
+                    <li>Balancing premium feel with mobile-first, fast booking</li>
+                    <li>Integrating with existing POS and reservation backend</li>
+                </ul>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="font-serif text-2xl font-bold mb-6">Research & Discovery</h2>
+                <p class="text-secondary leading-relaxed mb-4">
+                    We shadowed host staff and analyzed reservation data to see where users dropped off. Key findings: guests wanted to see real availability without multiple steps, and they valued dietary filters and special-occasion notes. We also ran preference tests on visual direction—warm earth tones and serif typography resonated most with the target demographic.
+                </p>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="font-serif text-2xl font-bold mb-6">Solution</h2>
+                <p class="text-secondary leading-relaxed mb-4">
+                    We defined a brand system with a custom palette (saffron, cream, deep green) and Playfair Display for headlines. The booking flow was reduced to: choose location → date & time (with live availability) → party size & notes → confirm. We added optional reminders and a post-meal feedback loop that increased repeat bookings. The site and app shared one design system for consistency.
+                </p>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="font-serif text-2xl font-bold mb-6">Results</h2>
+                <div class="grid sm:grid-cols-3 gap-6">
+                    <div class="p-6 bg-white rounded-2xl border border-gray-100">
+                        <p class="font-serif text-3xl font-bold text-accent">-28%</p>
+                        <p class="text-sm text-secondary mt-1">No-show rate</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl border border-gray-100">
+                        <p class="font-serif text-3xl font-bold text-accent">+41%</p>
+                        <p class="text-sm text-secondary mt-1">Mobile reservations</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl border border-gray-100">
+                        <p class="font-serif text-3xl font-bold text-accent">2.1x</p>
+                        <p class="text-sm text-secondary mt-1">Repeat booking rate</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pt-8 border-t border-gray-200">
+                <a href="index.html#work" class="inline-flex items-center gap-2 text-primary font-medium hover:text-accent transition-colors border-b-2 border-primary hover:border-accent pb-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to All Projects
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="py-8 px-6 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-secondary">© 2024 Akshara Nair. All rights reserved.</p>
+            <a href="index.html#contact" class="text-sm text-secondary hover:text-primary transition-colors">Get in Touch</a>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

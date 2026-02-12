@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSpace — E-Learning Dashboard | Akshara Nair</title>
+    <meta name="description" content="Case study: LearnSpace e-learning dashboard for educators and learners.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
+                    colors: { primary: '#1a1a1a', secondary: '#666666', accent: '#d4a574', cream: '#faf9f6', sage: '#87a878' }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-cream text-primary antialiased overflow-x-hidden">
+
+    <nav class="fixed w-full top-0 z-50 transition-all duration-300 sticky-nav" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-2xl font-bold tracking-tight hover:text-accent transition-colors">AN.</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html#work" class="nav-link text-sm font-medium tracking-wide uppercase">Work</a>
+                <a href="index.html#about" class="nav-link text-sm font-medium tracking-wide uppercase">About</a>
+                <a href="index.html#services" class="nav-link text-sm font-medium tracking-wide uppercase">Services</a>
+                <a href="index.html#contact" class="nav-link text-sm font-medium tracking-wide uppercase">Contact</a>
+            </div>
+            <a href="index.html#work" class="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Work
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <header class="mb-16">
+                <span class="text-xs uppercase tracking-wider text-sage border border-sage px-3 py-1 rounded-full">Education</span>
+                <h1 class="font-serif text-4xl md:text-6xl font-bold mt-4 mb-4">LearnSpace</h1>
+                <p class="text-xl text-secondary">E-Learning Dashboard</p>
+                <p class="text-secondary mt-6 max-w-2xl leading-relaxed">
+                    A unified dashboard for course creators and learners that simplifies progress tracking, content discovery, and engagement—making learning feel focused and achievable.
+                </p>
+            </header>
+
+            <figure class="rounded-2xl overflow-hidden mb-16 shadow-xl">
+                <img src="http://static.photos/education/1024x768/4" alt="LearnSpace dashboard" class="w-full h-auto object-cover aspect-video">
+            </figure>
+
+            <section class="mb-16">
+                <h2 class="font-serif text-2xl font-bold mb-6">Overview</h2>
+                <p class="text-secondary leading-relaxed mb-4">
+                    LearnSpace is an ed-tech platform used by universities and corporate training teams. The existing dashboard was cluttered and didn't differentiate clearly between learner and instructor views. Our brief was to redesign the core dashboard so that learners could see their progress at a glance and instructors could manage courses and analytics without context-switching.
+                </p>
+                <p class="text-secondary leading-relaxed">
+                    We focused on clarity, hierarchy, and a calm visual system that wouldn't compete with course content.
+                </p>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="font-serif text-2xl font-bold mb-6">The Challenge</h2>
+                <ul class="space-y-3 text-secondary leading-relaxed list-disc list-inside">
+                    <li>One product serving learners and instructors with very different mental models</li>
+                    <li>Information overload: courses, deadlines, certificates, discussions in one place</li>
+                    <li>Need to support both desktop (primary) and tablet use in classrooms</li>
+                    <li>Accessibility and readability for long study sessions</li>
+                </ul>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="font-serif text-2xl font-bold mb-6">Research & Discovery</h2>
+                <p class="text-secondary leading-relaxed mb-4">
+                    We interviewed learners and instructors and ran card-sorting and task-based usability tests. Learners wanted "what's next" and "how am I doing" front and center; instructors wanted quick access to grading, analytics, and course settings. We defined two dashboard modes (Learner / Instructor) with a clear toggle and a shared design language so the product felt like one cohesive experience.
+                </p>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="font-serif text-2xl font-bold mb-6">Solution</h2>
+                <p class="text-secondary leading-relaxed mb-4">
+                    We introduced a role-aware dashboard: learners see a "Continue learning" hero, progress rings per course, and upcoming deadlines. Instructors see course cards with key metrics and quick actions. We used a sage-and-cream palette with high contrast for text, generous spacing, and collapsible sections so power users could customize their view. A consistent sidebar and header work across both modes for familiarity.
+                </p>
+            </section>
+
+            <section class="mb-16">
+                <h2 class="font-serif text-2xl font-bold mb-6">Results</h2>
+                <div class="grid sm:grid-cols-3 gap-6">
+                    <div class="p-6 bg-white rounded-2xl border border-gray-100">
+                        <p class="font-serif text-3xl font-bold text-sage">+44%</p>
+                        <p class="text-sm text-secondary mt-1">Course completion rate</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl border border-gray-100">
+                        <p class="font-serif text-3xl font-bold text-sage">-35%</p>
+                        <p class="text-sm text-secondary mt-1">Support tickets (navigation)</p>
+                    </div>
+                    <div class="p-6 bg-white rounded-2xl border border-gray-100">
+                        <p class="font-serif text-3xl font-bold text-sage">4.7★</p>
+                        <p class="text-sm text-secondary mt-1">Instructor satisfaction</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pt-8 border-t border-gray-200">
+                <a href="index.html#work" class="inline-flex items-center gap-2 text-primary font-medium hover:text-accent transition-colors border-b-2 border-primary hover:border-accent pb-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to All Projects
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="py-8 px-6 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-secondary">© 2024 Akshara Nair. All rights reserved.</p>
+            <a href="index.html#contact" class="text-sm text-secondary hover:text-primary transition-colors">Get in Touch</a>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

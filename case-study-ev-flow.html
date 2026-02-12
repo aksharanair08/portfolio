@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV-Flow — App Design | Akshara Nair</title>
+    <meta name="description" content="Case study: Understanding EV drivers' behaviors and preferences to facilitate charging station selection.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
+                    colors: {
+                        primary: '#1a1a1a', secondary: '#666666', accent: '#d4a574', cream: '#faf9f6', sage: '#87a878',
+                        evgreen: '#49754E', evgreenDark: '#284827', evgreenMid: '#5c8865', evgreenDeep: '#30724C'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Pure White background: #FFFFFF / rgb(255,255,255) / hsl(0,0%,100%) */
+        .ev-flow-content { background-color: #FFFFFF; color: #1a1a1a; }
+        .ev-flow-content .text-primary { color: #1a1a1a; }
+        .ev-flow-content .text-secondary { color: #666666; }
+        .ev-flow-content .text-evgreenDark { color: #284827; }
+        .ev-flow-hero-title { color: #49754E; }
+        .ev-flow-section-title { color: #284827; border-bottom-color: rgba(73, 117, 78, 0.3); }
+        .ev-flow-blockquote { font-size: 1.125rem; line-height: 1.75; color: #1a1a1a; border-left: 4px solid #5c8865; padding-left: 1.5rem; margin: 1.5rem 0; font-style: normal; }
+        .ev-flow-about-label { font-size: 0.875rem; letter-spacing: 0.2em; text-transform: uppercase; color: #5c8865; font-weight: 600; margin-bottom: 0.5rem; }
+        .ev-flow-btn-app { background: #30724C; color: white; padding: 0.875rem 1.75rem; border-radius: 9999px; font-weight: 500; transition: background 0.2s, transform 0.2s; }
+        .ev-flow-btn-app:hover { background: #284827; color: white; transform: translateY(-1px); }
+        .ev-flow-footer-contact { background: #1a1a1a; color: #faf9f6; }
+        .ev-flow-footer-contact a { color: #faf9f6; }
+        .ev-flow-quote-panel { background-color: #dceadc; color: #1a1a1a; }
+        .ev-flow-alt-section { background-color: #f0f4ef; color: #1a1a1a; }
+        .ev-flow-alt-section .text-primary { color: #1a1a1a; }
+        .ev-flow-alt-section .text-secondary { color: #555; }
+        .ev-flow-hero-title { font-size: 3.5rem; line-height: 1.1; letter-spacing: -0.02em; }
+        .ev-flow-section-title { font-size: 1.875rem; line-height: 1.3; letter-spacing: -0.01em; }
+        @media (max-width: 768px) {
+            .ev-flow-hero-title { font-size: 2.5rem; }
+            .ev-flow-section-title { font-size: 1.5rem; }
+        }
+        /* Header/nav same as home: content on top of background */
+        .ev-flow-nav {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(26, 26, 26, 0.06);
+        }
+        /* Fade-in for wireframes - visible by default, fade in on scroll */
+        .ev-flow-fade {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .ev-flow-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Make images visible immediately if script hasn't run */
+        .ev-flow-fade img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        /* Challenges highlight */
+        .ev-flow-challenge-box {
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(73, 117, 78, 0.3);
+            border-radius: 1rem;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body class="text-primary antialiased overflow-x-hidden" style="background-color: #FFFFFF;">
+
+    <nav class="ev-flow-nav fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-2xl font-bold tracking-tight hover:text-accent transition-colors">AN.</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html#work" class="nav-link text-sm font-medium tracking-wide uppercase">Work</a>
+                <a href="index.html#about" class="nav-link text-sm font-medium tracking-wide uppercase">About</a>
+                <a href="index.html#services" class="nav-link text-sm font-medium tracking-wide uppercase">Services</a>
+                <a href="index.html#contact" class="nav-link text-sm font-medium tracking-wide uppercase">Contact</a>
+            </div>
+            <a href="index.html#work" class="inline-flex items-center gap-2 text-sm font-medium text-secondary hover:text-primary transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Work
+            </a>
+        </div>
+    </nav>
+
+    <main class="ev-flow-content pt-28 pb-20 px-6">
+        <!-- Hero: content left, image right -->
+        <section class="max-w-6xl mx-auto mb-24 md:mb-32">
+            <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div class="space-y-4">
+                    <h1 class="ev-flow-hero-title font-semibold mb-3">EV-FLOW</h1>
+                    <p class="text-secondary text-base md:text-lg font-medium uppercase tracking-wider">App Design</p>
+                    <p class="text-primary text-xl md:text-2xl font-medium leading-relaxed pt-2">
+                        Understanding Electric Vehicle Drivers' Behaviors and Preferences to Facilitate Charging Station Selection.
+                    </p>
+                </div>
+                <div class="flex items-center justify-center">
+                    <img src="public/ev-flow/EV-flow.png" alt="EV-Flow — charging station app" class="w-full h-auto object-contain max-w-lg">
+                </div>
+            </div>
+        </section>
+
+        <div class="max-w-6xl mx-auto">
+            <!-- About the project (left) + Design question (right, light green) -->
+            <section class="mb-20 md:mb-28 grid md:grid-cols-2 gap-10 md:gap-12 items-stretch">
+                <div class="flex flex-col justify-center space-y-4">
+                    <p class="ev-flow-about-label uppercase tracking-wider mb-2">About the project</p>
+                    <p class="text-secondary leading-relaxed text-base md:text-lg">
+                        Over the last ten years, electric vehicles (EVs) experienced a dramatic surge in popularity due to a range of factors that piqued public interest.
+                        Despite their growing appeal, the limited availability of charging points in comparison to gas stations is a notable concern, leading to 'range anxiety,' the apprehension of batteries getting drained before finding a charging point. Our research to understand EV drivers' behaviors and preferences will allow us to reduce range anxiety and mental load, allowing for an easier selection process.
+                    </p>
+                </div>
+                <div class="ev-flow-quote-panel rounded-3xl p-10 md:p-12 flex flex-col justify-center shadow-sm">
+                    <p class="text-primary text-xl md:text-2xl font-semibold leading-relaxed m-0">
+                        How Can We Facilitate Charging Station Selection to Decrease Charging Anxiety and Mental Load of Electric Vehicle Drivers?
+                    </p>
+                </div>
+            </section>
+        </div>
+
+        <div class="max-w-6xl mx-auto">
+            <!-- Background and Information -->
+            <section class="mb-20 md:mb-28">
+                <div class="grid md:grid-cols-3 gap-10 md:gap-12 items-start">
+                    <div>
+                        <h2 class="ev-flow-section-title font-serif font-bold text-evgreenDark mb-0">Background and Information</h2>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <p class="text-secondary leading-relaxed text-base md:text-lg">
+                            In the current application market, there are multiple competitors that focus on facilitating charging station processes, for example: PlugShare, ChargePoint, and Electrify America.
+                        </p>
+                    </div>
+                    <div class="flex flex-row gap-8 items-center justify-center md:justify-start flex-wrap">
+                        <img src="public/ev-flow/Plugshare.png" alt="PlugShare logo" class="h-14 md:h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity">
+                        <img src="public/ev-flow/ChargePoint.png" alt="ChargePoint logo" class="h-14 md:h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity">
+                        <img src="public/ev-flow/ElectrifyAmerica.png" alt="Electrify America logo" class="h-14 md:h-16 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Pros / Cons + Literature Review (different background) -->
+        <section class="ev-flow-alt-section py-16 md:py-24 px-6 -mx-6 md:px-12 md:-mx-0">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-6 md:gap-8 mb-16">
+                    <div class="ev-flow-pros-box bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-green-200/60">
+                        <h3 class="font-serif text-xl font-bold text-evgreenDark mb-5 pb-3 border-b border-green-200/80">Pros</h3>
+                        <ul class="text-secondary space-y-3 text-base leading-relaxed list-none">
+                            <li class="flex items-start gap-3"><span class="text-evgreen shrink-0 mt-0.5">✓</span> In-App paying methods.</li>
+                            <li class="flex items-start gap-3"><span class="text-evgreen shrink-0 mt-0.5">✓</span> Detailed charger type information.</li>
+                            <li class="flex items-start gap-3"><span class="text-evgreen shrink-0 mt-0.5">✓</span> Up to date charging speed information.</li>
+                            <li class="flex items-start gap-3"><span class="text-evgreen shrink-0 mt-0.5">✓</span> Latest queuing availability.</li>
+                        </ul>
+                    </div>
+                    <div class="ev-flow-cons-box bg-white rounded-2xl p-6 md:p-8 shadow-sm border border-amber-200/70">
+                        <h3 class="font-serif text-xl font-bold text-evgreenDark mb-5 pb-3 border-b border-amber-200/80">Cons</h3>
+                        <ul class="text-secondary space-y-3 text-base leading-relaxed list-none">
+                            <li class="flex items-start gap-3"><span class="text-amber-600 shrink-0 mt-0.5">•</span> Not all charging station locations are accurately reported, leading to inconsistent availability.</li>
+                            <li class="flex items-start gap-3"><span class="text-amber-600 shrink-0 mt-0.5">•</span> Added charging stations might be private, for example a company or a house, etc.</li>
+                            <li class="flex items-start gap-3"><span class="text-amber-600 shrink-0 mt-0.5">•</span> Users constantly switch between different apps based on their location or vehicle compatibility.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2 class="ev-flow-section-title font-serif text-2xl font-bold text-evgreenDark mb-8">Literature Review</h2>
+                <div class="space-y-6 text-secondary text-base leading-relaxed">
+                    <p><strong class="text-primary">Purpose:</strong> Understanding the behavior and decision-making process of EV drivers when selecting charging stations to develop a user-friendly charging station app [EV-Flow].</p>
+                    <p><strong class="text-primary">Literature Review Key Findings:</strong> Issues include range anxiety, inconvenient charging times, inaccurate app data, lack of real-time data, and diverse user interfaces.</p>
+                    <p><strong class="text-primary">Factors Influencing Selection:</strong> Service and practical concerns, perceived utility, and built environment (Wang et al., Guo et al.).</p>
+                    <p><strong class="text-primary">Decision-Making Steps:</strong> Checking the state of charge, considering location, availability, and cost, and completing the charging process.</p>
+                    <p><strong class="text-primary">Ideal App Features:</strong> Accessibility, real-time data, compatibility, cost information, and data consolidation. <strong class="text-primary">Enhancements:</strong> Personalization, parking availability, nearby amenities.</p>
+                    <p><strong class="text-primary">EV-Flow Prototype:</strong> Provides real-time information on station availability and plug types, featuring an automated charging station selection for extended trips.</p>
+                    <p><strong class="text-primary">Aim:</strong> Reduce cognitive load, address user issues, respond to unique EV driver's needs and improve the overall charging station selection process.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- User Persona - Jennifer (main/white background) -->
+        <section class="ev-flow-content py-16 md:py-20 px-6">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-[1fr_1.4fr] gap-10 md:gap-14 items-center">
+                <div>
+                    <h2 class="ev-flow-section-title font-serif text-2xl font-bold text-evgreenDark mb-0">User Persona – Jennifer</h2>
+                </div>
+                <div class="flex justify-center md:justify-end">
+                    <img src="public/ev-flow/UserPersona-Jennifer.png" alt="User Persona — Jennifer" class="w-full max-w-md md:max-w-2xl lg:max-w-3xl h-auto object-contain">
+                </div>
+            </div>
+        </section>
+
+        <!-- Sketching and Ideation (alt background) -->
+        <section class="ev-flow-alt-section py-16 md:py-24 px-6 -mx-6 md:px-12 md:-mx-0">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+                    <div class="space-y-6">
+                        <h2 class="ev-flow-section-title font-serif text-2xl font-bold text-evgreenDark mb-6">Sketching and Ideation</h2>
+                        <div class="text-secondary text-base leading-relaxed space-y-6">
+                            <div>
+                                <p class="font-semibold text-primary mb-1">Ideation and Sketching Methods:</p>
+                                <p>Round of Crazy 8's—a fast ideation method to create multiple screens and features.</p>
+                            </div>
+                            <div class="ev-flow-challenge-box">
+                                <p class="font-semibold text-primary mb-1">Challenges:</p>
+                                <p class="mb-0">How can we display availability of a charging station for quicker selection, rather than using reviews or ratings?</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-primary mb-2">Features:</p>
+                                <ul class="space-y-3 list-none pl-0">
+                                    <li>
+                                        <strong class="text-primary">Map Home Screen:</strong> Display a map to display charging stations, and include a navigation bar for:
+                                        <ul class="mt-2 space-y-1.5 pl-4 list-none">
+                                            <li><strong>Profile:</strong> Change Name, Car Model, Plug Type, and Preferred Amenities.</li>
+                                            <li><strong>History:</strong> A list of known saved stations.</li>
+                                            <li><strong>Search Bar:</strong> A quick way to look up a specific charging station based on current location.</li>
+                                            <li><strong>Plan Trip:</strong> A way to plan a road trip and get an automized route of charging stations based on their Car Model's average range.</li>
+                                        </ul>
+                                    </li>
+                                    <li class="pt-2">
+                                        <strong class="text-primary">Charging Station Details:</strong> Display the following details in this order:
+                                        <p class="mt-1 pl-0">Charging Station Name, ETA, Distance Away, Address, Images, Open Hours, Charging Speed, Amenities, and Recent Reviews.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-6 flex flex-col">
+                        <figure class="ev-flow-fade w-full" data-fade>
+                            <img src="public/ev-flow/Wireframe1-low-fidelity.png" alt="Wireframe — low fidelity 1" class="w-full h-auto object-contain rounded-lg shadow-md">
+                        </figure>
+                        <figure class="ev-flow-fade w-full" data-fade style="transition-delay: 0.12s;">
+                            <img src="public/ev-flow/Wireframe2-low-fidelity.png" alt="Wireframe — low fidelity 2" class="w-full h-auto object-contain rounded-lg shadow-md">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prototype Introduction (main/white background) -->
+        <section class="ev-flow-content py-16 md:py-20 px-6">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-14 items-center">
+                <div class="space-y-5">
+                    <h2 class="ev-flow-section-title font-serif text-2xl font-bold text-evgreenDark mb-0">Prototype Introduction</h2>
+                    <div class="text-secondary text-base leading-relaxed space-y-4">
+                        <p>We present you <strong class="text-primary">EV-Flow</strong>, an easy-to-use charging station application to help EV drivers find the best station and keep the energy flowing!</p>
+                        <p>The interactive prototype, EV-Flow, aims to facilitate decision-making for electric vehicle (EV) drivers. Constructed using Figma software, this application is designed to help users locate the best charging station according to their needs.</p>
+                        <p>After logging in or signing up, users are led to the core of the app, a map that indicates their location and nearby charging stations. EV-Flow is meant to be used for researchers to collect data on EV drivers' thought processes and decision-making factors when choosing a charging station.</p>
+                    </div>
+                </div>
+                <div class="flex justify-center md:justify-end">
+                    <img src="public/ev-flow/Prototype Introduction.png" alt="EV-Flow prototype introduction" class="w-full max-w-md md:max-w-xl lg:max-w-2xl h-auto object-contain">
+                </div>
+            </div>
+        </section>
+
+        <!-- Prototype Charging Station Details (main/white background) -->
+        <section class="ev-flow-content py-16 md:py-24 px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="ev-flow-section-title font-serif text-2xl font-bold text-evgreenDark mb-10 md:mb-12 text-center">Prototype Charging Station Details</h2>
+                
+                <div class="mb-10 md:mb-12 flex justify-center">
+                    <figure class="w-full max-w-5xl">
+                        <img src="public/ev-flow/screen.png" alt="EV-Flow screens" class="w-full h-auto object-contain rounded-lg">
+                    </figure>
+                </div>
+
+                <div class="text-secondary text-base leading-relaxed space-y-4 max-w-4xl mx-auto">
+                    <p>EV-Flow focuses on displaying <strong class="text-primary">clear charging station availability</strong> and the <strong class="text-primary">types of plugs available in real-time</strong>.</p>
+                    <p>For example, it shows that out of five available spots, four are occupied at the "EVgo Charging Station," and only one J-1772 plug is free for use. The intended goal is to simplify the decision-making process for Electric Vehicle (EV) drivers, through visually appealing representation of nearby amenities and charging costs.</p>
+                    <p>EV-Flow also includes recent reviews of the charging station, as this value proposition, that relies on crowdsourced information, can influence a driver's decision and create relevancy about a specific station's status.</p>
+                    <p>Eventually, such intricate details aim to gather more comprehensive data on what aspects EV drivers consider, possibly even unconsciously, when choosing a charging station—an aspect which may not have been fully elucidated in previous surveys.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prototype Charging Station Details — Attention Analysis (alt background) -->
+        <section class="ev-flow-alt-section py-16 md:py-24 px-6 -mx-6 md:px-12 md:-mx-0">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+                    <div class="space-y-5 text-secondary text-base leading-relaxed">
+                        <h2 class="ev-flow-section-title font-serif text-2xl font-bold text-evgreenDark mb-2">Prototype Charging Station Details - Attention Analysis</h2>
+                        <p>To test attention levels being given to each charging station detail we used the software <strong class="text-primary">Attention Insight</strong>, which uses machine learning technology trained with <strong class="text-primary">70,000+</strong> images from real eye-tracking studies to test this specific screen and create a focus map.</p>
+                        <div>
+                            <p class="font-semibold text-primary mb-2">Red Areas:</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Title of the charging station</li>
+                                <li>Availability bar showcasing the current charging station's availability</li>
+                                <li>ETA of each charging station</li>
+                            </ul>
+                        </div>
+                        <p>This is a successful analysis since it supports our design system and provides a level of certainty about our application's success, as the most important details of the charging station's details are receiving the most focus.</p>
+                        <p>The Attention Insight software also analyzed our screen against multiple other images and determined that our design implementation lies under a <strong class="text-primary">71% optimal clarity ranking</strong>, making our design clearer than 57% of the most popular websites.</p>
+                        <p>Based on this report, we are hoping for a successful round of usability testing interviews to gather further quantitative data on the success of our application and proceed with future improvements on aspects that might be confusing.</p>
+                    </div>
+                    <div class="flex items-start justify-center md:justify-end">
+                        <figure class="w-full max-w-md md:max-w-lg">
+                            <img src="public/ev-flow/heatflow.png" alt="Attention Insight focus map for EV-Flow" class="w-full h-auto object-contain rounded-lg max-h-[500px] md:max-h-[600px]">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Heuristics & Safety Measures (split white / deep green like mockup) -->
+        <section class="py-16 md:py-24 px-6 -mx-6 md:px-12 md:-mx-0">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 min-h-[380px] md:min-h-[440px] rounded-none md:rounded-2xl overflow-hidden shadow-sm">
+                <!-- Left: Design Heuristics (white background) -->
+                <div class="bg-white px-6 md:px-10 py-10 flex flex-col justify-center">
+                    <div class="text-secondary text-sm md:text-base leading-relaxed space-y-5 max-w-xl">
+                        <h2 class="font-serif text-2xl md:text-3xl font-bold text-evgreenDark mb-4 md:mb-6 text-center md:text-left">
+                            Design Heuristics
+                        </h2>
+                        <p>
+                            Implemented design heuristics by <strong class="text-primary">Jakob Nielsen's 10 general principles for interaction design</strong>:
+                        </p>
+                        <div class="space-y-2">
+                            <p class="font-semibold text-primary">Visibility of System Status</p>
+                            <p>Displayed charging stations based on availability, and with different colors to signify different levels of availability.</p>
+                            <ul class="list-disc list-inside mt-1 space-y-1">
+                                <li>Red for busy stations</li>
+                                <li>Yellow for semi-busy stations</li>
+                                <li>Green for quiet or free stations</li>
+                            </ul>
+                        </div>
+                        <div class="space-y-2">
+                            <p class="font-semibold text-primary">Consistency and standards</p>
+                            <p>Employed standardized vocabulary by EV drivers and what is currently used in the EV industry, for example:</p>
+                            <ul class="list-disc list-inside mt-1 space-y-1">
+                                <li>Plug type models</li>
+                                <li>Charging cost information</li>
+                                <li>Charging speed units and information</li>
+                            </ul>
+                        </div>
+                        <figure class="pt-4 flex justify-start md:justify-start">
+                            <img src="public/ev-flow/location.png" alt="EV-Flow location and availability design" class="w-full max-w-[260px] md:max-w-sm h-auto object-contain">
+                        </figure>
+                    </div>
+                </div>
+
+                <!-- Right: Safety Measures (deep green background, centered content) -->
+                <div class="bg-evgreenDark text-cream px-8 md:px-10 py-10 flex flex-col items-center justify-center text-center">
+                    <h2 class="font-serif text-2xl md:text-3xl font-bold mb-6">
+                        Safety Measures
+                    </h2>
+                    <figure class="w-full max-w-[190px] md:max-w-[230px] mb-6">
+                        <img src="public/ev-flow/screen5.png" alt="Safety-focused EV-Flow screen" class="w-full h-auto object-contain drop-shadow-xl">
+                    </figure>
+                    <p class="text-sm md:text-base leading-relaxed max-w-md">
+                        Implemented a <strong class="text-cream">lock screen activated during driving</strong> to reduce distractions for users who might try to operate the application while driving, helping keep their focus on the road.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usability Testing Overview -->
+        <section class="ev-flow-alt-section py-16 md:py-24 px-6 -mx-6 md:px-12 md:-mx-0">
+            <div class="max-w-6xl mx-auto grid md:grid-cols-[1.2fr_1fr] gap-10 md:gap-14 items-center">
+                <div class="space-y-5 text-secondary text-base leading-relaxed">
+                    <h2 class="ev-flow-section-title font-serif text-2xl md:text-3xl font-bold text-evgreenDark mb-4">
+                        Usability Testing
+                    </h2>
+                    <p>
+                        During the Zoom usability testing sessions, participants were sent a Figma prototype link to EV-Flow and were invited to share their screens for a thorough evaluation of the app experience.
+                    </p>
+                    <p>
+                        Usability testing was conducted using both in-person and online participants. In-person participants completed tasks using an iOS MacBook interface (EV-Flow via Figma) and iPhone interface (PlugShare via native app). Online participants used the same device combination, facilitated through Zoom screen sharing.
+                    </p>
+                    <p>
+                        These sessions generated rich qualitative and quantitative data that will guide future iterations of EV-Flow, helping to further facilitate charging station selection for EV drivers.
+                    </p>
+                </div>
+                <div class="flex justify-center md:justify-end">
+                    <figure class="w-full max-w-md md:max-w-lg">
+                        <img src="public/ev-flow/usableTesting.png" alt="EV-Flow usability testing screens" class="w-full h-auto object-contain rounded-xl shadow-md">
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usability Tasks, Findings, and Iterations -->
+        <section class="ev-flow-content py-16 md:py-24 px-6">
+            <div class="max-w-6xl mx-auto space-y-14">
+                <!-- Tasks -->
+                <div class="space-y-8">
+                    <h3 class="ev-flow-section-title font-serif text-2xl font-bold text-evgreenDark">
+                        Usability Tasks
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                        <!-- Task 1 -->
+                        <div class="bg-white border border-gray-100 rounded-2xl p-5 md:p-6 shadow-sm">
+                            <p class="text-xs font-semibold tracking-[0.2em] uppercase text-evgreen mb-2">Task 1</p>
+                            <p class="font-semibold text-primary mb-2">Objective</p>
+                            <p class="text-secondary text-sm mb-3">Select a nearby charging station.</p>
+                            <p class="font-semibold text-primary mb-2">Question</p>
+                            <p class="text-secondary text-sm mb-3">How easy or challenging was it to locate the search feature and interpret the results?</p>
+                            <p class="font-semibold text-primary mb-2">Metric</p>
+                            <p class="text-secondary text-sm mb-0">Time from the beginning of the task to the "Congratulations" screen, then compared between EV-Flow and competitor app PlugShare.</p>
+                        </div>
+
+                        <!-- Task 2 -->
+                        <div class="bg-white border border-gray-100 rounded-2xl p-5 md:p-6 shadow-sm">
+                            <p class="text-xs font-semibold tracking-[0.2em] uppercase text-evgreen mb-2">Task 2</p>
+                            <p class="font-semibold text-primary mb-2">Objective</p>
+                            <p class="text-secondary text-sm mb-3">Choose a charging station in Detroit.</p>
+                            <p class="font-semibold text-primary mb-2">Question</p>
+                            <p class="text-secondary text-sm mb-3">What specific information influenced your decision in selecting that particular charging station?</p>
+                            <p class="font-semibold text-primary mb-2">Metric</p>
+                            <p class="text-secondary text-sm mb-0">
+                                Rating, on a 1–5 scale, of which factor most influenced the decision
+                                (1 = Least important, 5 = Most important).
+                            </p>
+                        </div>
+
+                        <!-- Task 3 -->
+                        <div class="bg-white border border-gray-100 rounded-2xl p-5 md:p-6 shadow-sm">
+                            <p class="text-xs font-semibold tracking-[0.2em] uppercase text-evgreen mb-2">Task 3</p>
+                            <p class="font-semibold text-primary mb-2">Objective</p>
+                            <p class="text-secondary text-sm mb-3">Provide feedback or a rating for a recently visited charging station.</p>
+                            <p class="font-semibold text-primary mb-2">Focus</p>
+                            <p class="text-secondary text-sm mb-0">Capture open-ended feedback on clarity, visual hierarchy, and missing features within the station details screen.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Qualitative Feedback -->
+                <div class="space-y-6">
+                    <h3 class="ev-flow-section-title font-serif text-2xl font-bold text-evgreenDark">
+                        Usability Testing Feedback
+                    </h3>
+                    <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                        <figure class="bg-cream border border-evgreen/10 rounded-2xl p-5 md:p-6 h-full flex flex-col">
+                            <blockquote class="text-sm text-secondary leading-relaxed flex-1">
+                                “Would prefer an increased brightness of the overall app interface, along with additional vibrancy of the colors for the charging icons to stand out. Mentioned that changing the icon from a pinpoint to a battery would be a cool addition.”
+                            </blockquote>
+                        </figure>
+                        <figure class="bg-cream border border-evgreen/10 rounded-2xl p-5 md:p-6 h-full flex flex-col">
+                            <blockquote class="text-sm text-secondary leading-relaxed flex-1">
+                                “I chose that specific charging station based on the availability and cost of charging, since I was looking for something more affordable.”
+                            </blockquote>
+                        </figure>
+                        <figure class="bg-cream border border-evgreen/10 rounded-2xl p-5 md:p-6 h-full flex flex-col">
+                            <blockquote class="text-sm text-secondary leading-relaxed flex-1">
+                                “I like that I can see where the charging stations are, and would love a filter option and the ability to search for a specific area like Detroit directly from the search bar.”
+                            </blockquote>
+                        </figure>
+                    </div>
+                </div>
+
+                <!-- Iterations and Changes -->
+                <div class="space-y-8">
+                    <h3 class="ev-flow-section-title font-serif text-2xl font-bold text-evgreenDark">
+                        Iterations and Changes
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-10 md:gap-14 items-start">
+                        <div class="space-y-5 text-secondary text-base leading-relaxed">
+                            <p>
+                                Based on user feedback, we identified key opportunities to refine EV-Flow and better align it with EV drivers’ priorities.
+                            </p>
+                            <ul class="space-y-3 list-none pl-0">
+                                <li>
+                                    <strong class="text-primary">Filter System:</strong>
+                                    Initially overlooked due to profile preferences (plug type, amenities) acting as a proxy filter. Users highlighted a desire for an explicit filter to prioritize what matters most in the moment (e.g., cost, speed, amenities).
+                                </li>
+                                <li>
+                                    <strong class="text-primary">Search Bar:</strong>
+                                    Originally implemented as a visual placeholder. Participants expected to search by city or station name (e.g., “Detroit”), which will be prioritized in future iterations.
+                                </li>
+                                <li>
+                                    <strong class="text-primary">Brightness & Color Vibrancy:</strong>
+                                    The darker map was intended to increase contrast but in practice reduced clarity. We increased overall brightness and color vibrancy so charging icons stand out more, with a future opportunity to add a day/night mode toggle.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="space-y-5">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <p class="text-xs font-semibold tracking-[0.25em] uppercase text-secondary">Before</p>
+                                    <figure class="border border-gray-100 rounded-xl overflow-hidden shadow-sm bg-white flex items-center justify-center h-72">
+                                        <img src="public/ev-flow/before.png" alt="Original EV-Flow map interface before iterations" class="max-h-full w-auto object-contain">
+                                    </figure>
+                                </div>
+                                <div class="space-y-2">
+                                    <p class="text-xs font-semibold tracking-[0.25em] uppercase text-secondary">After</p>
+                                    <figure class="border border-gray-100 rounded-xl overflow-hidden shadow-sm bg-white flex items-center justify-center h-72">
+                                        <img src="public/ev-flow/after.png" alt="Updated EV-Flow map interface after iterations" class="max-h-full w-auto object-contain">
+                                    </figure>
+                                </div>
+                            </div>
+                            <p class="text-secondary text-sm leading-relaxed">
+                                The revised interface increases legibility and visual contrast where it matters most—charging availability and cost—while keeping room for future enhancements such as dynamic light/dark modes.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="max-w-6xl mx-auto px-6">
+            <!-- Back to work -->
+            <section class="pt-12 border-t border-gray-200">
+                <a href="index.html#work" class="inline-flex items-center gap-2 text-primary font-medium hover:text-evgreen transition-colors border-b-2 border-primary hover:border-evgreen pb-1">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to All Projects
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="ev-flow-footer-contact py-12 px-6">
+        <div class="max-w-7xl mx-auto text-center">
+            <h4 class="text-xl font-semibold mb-2">Contact</h4>
+            <a href="mailto:aksharanair2024@gmail.com" class="text-cream/95 hover:text-white transition-colors">aksharanair2024@gmail.com</a>
+            <p class="text-sm text-cream/70 mt-6">© 2024 Akshara Nair. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>lucide.createIcons();</script>
+    <script>
+        (function() {
+            var els = document.querySelectorAll('[data-fade]');
+            if (els.length === 0) return;
+            var io = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('visible');
+                        io.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '50px' });
+            els.forEach(function(el) {
+                // Make visible immediately if already in viewport
+                var rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.classList.add('visible');
+                } else {
+                    io.observe(el);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
