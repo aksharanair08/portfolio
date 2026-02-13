@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mindful — Mental Health Platform | Akshara Nair</title>
-    <meta name="description" content="Case study: Designing Mindful, a mental health platform for accessibility and calm.">
+    <title>Seamount Fishes — App Redesign | Akshara Nair</title>
+    <meta name="description" content="Case study: Redesigning Seamount Fishes — an innovative mobile app for identifying reef fishes around India's seamounts.">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -18,14 +18,34 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
-                    colors: { primary: '#1a1a1a', secondary: '#666666', accent: '#d4a574', cream: '#faf9f6', sage: '#87a878' }
+                    colors: {
+                        primary: '#1a1a1a',
+                        secondary: '#666666',
+                        accent: '#0d9488',
+                        cream: '#faf9f6',
+                        sage: '#87a878',
+                        ocean: '#0e7490',
+                        seafoam: '#ccfbf1'
+                    }
                 }
             }
         }
     </script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .seamount-accent { --accent: #0d9488; }
+        .slider-wrap { position: relative; }
+        .slider-track { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; padding: 0.5rem 0; scroll-behavior: smooth; }
+        .slider-track::-webkit-scrollbar { display: none; }
+        .slider-track img { scroll-snap-align: center; flex: 0 0 auto; max-height: 65vh; width: auto; object-fit: contain; border-radius: 1rem; }
+        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 48px; height: 48px; border-radius: 50%; background: white; border: 1px solid #e5e7eb; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #1a1a1a; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .slider-arrow:hover { background: #faf9f6; color: #0d9488; border-color: #0d9488; }
+        .slider-arrow.left { left: -12px; }
+        .slider-arrow.right { right: -12px; }
+        @media (max-width: 640px) { .slider-arrow { width: 40px; height: 40px; } .slider-arrow.left { left: 4px; } .slider-arrow.right { right: 4px; } }
+    </style>
 </head>
-<body class="bg-cream text-primary antialiased overflow-x-hidden">
+<body class="bg-white text-primary antialiased overflow-x-hidden">
 
     <nav class="fixed w-full top-0 z-50 transition-all duration-300 sticky-nav" id="navbar">
         <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
@@ -43,73 +63,366 @@
     </nav>
 
     <main class="pt-28 pb-20 px-6">
-        <div class="max-w-4xl mx-auto">
-            <header class="mb-16">
-                <span class="text-xs uppercase tracking-wider text-sage border border-sage px-3 py-1 rounded-full">Healthcare</span>
-                <h1 class="font-serif text-4xl md:text-6xl font-bold mt-4 mb-4">Mindful</h1>
-                <p class="text-xl text-secondary">Mental Health Platform</p>
-                <p class="text-secondary mt-6 max-w-2xl leading-relaxed">
-                    A compassionate digital experience that connects users with resources, journaling, and professional support while maintaining privacy and reducing stigma.
-                </p>
+        <div class="max-w-6xl mx-auto">
+            <!-- Hero: text left, 3 phones right -->
+            <header class="mb-20 md:mb-28 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div>
+                    <span class="text-xs uppercase tracking-wider text-accent border border-accent px-3 py-1 rounded-full">App Redesign</span>
+                    <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-bold mt-4 mb-6 leading-tight">Seamount Fishes</h1>
+                    <p class="text-xl md:text-2xl text-secondary leading-relaxed">
+                        Redesigning Seamount Fishes — the world beneath the waves.
+                    </p>
+                    <p class="text-secondary mt-6 leading-relaxed">
+                        An innovative mobile application designed to simplify and enhance the process of identifying reef fishes found around India's seamounts. In a field where accuracy, accessibility, and engagement are crucial, this redesign project sought to transform the user experience of the Seamount Fishes App — making it more intuitive, educational, and delightful for marine researchers, divers, and ocean enthusiasts.
+                    </p>
+                </div>
+                <figure class="rounded-2xl overflow-hidden bg-white">
+                    <img src="public/Seamount f/3 phone picture.jpg" alt="Seamount Fishes app on three devices" class="w-full h-auto object-cover">
+                </figure>
             </header>
 
-            <figure class="rounded-2xl overflow-hidden mb-16 shadow-xl">
-                <img src="http://static.photos/wellness/1024x768/2" alt="Mindful app experience" class="w-full h-auto object-cover aspect-video">
-            </figure>
-
-            <section class="mb-16">
-                <h2 class="font-serif text-2xl font-bold mb-6">Overview</h2>
-                <p class="text-secondary leading-relaxed mb-4">
-                    Mindful is a mental health and wellness platform that needed a complete product and brand refresh. The client wanted an interface that felt safe, calm, and inclusive—avoiding clinical or cold aesthetics while still feeling credible and professional.
-                </p>
-                <p class="text-secondary leading-relaxed">
-                    We focused on soft typography, muted colors with sage and cream accents, and clear hierarchy so users could find journaling, mood tracking, and therapist matching without feeling overwhelmed.
-                </p>
-            </section>
-
-            <section class="mb-16">
-                <h2 class="font-serif text-2xl font-bold mb-6">The Challenge</h2>
-                <ul class="space-y-3 text-secondary leading-relaxed list-disc list-inside">
-                    <li>Balancing warmth with professionalism and trust</li>
-                    <li>Designing for vulnerable moments (crisis support, first-time seekers)</li>
-                    <li>Making complex flows (matching, scheduling) feel simple</li>
-                    <li>Strict privacy and accessibility requirements</li>
-                </ul>
-            </section>
-
-            <section class="mb-16">
-                <h2 class="font-serif text-2xl font-bold mb-6">Research & Discovery</h2>
-                <p class="text-secondary leading-relaxed mb-4">
-                    We ran co-design workshops with mental health professionals and user interviews with people who had used similar apps. Key themes: users wanted control over how much they shared, optional anonymity, and a "soft entry"—small steps like daily check-ins before committing to sessions. We also aligned with WCAG 2.1 AA and considered reduced-motion and low-stimulus preferences.
-                </p>
-            </section>
-
-            <section class="mb-16">
-                <h2 class="font-serif text-2xl font-bold mb-6">Solution</h2>
-                <p class="text-secondary leading-relaxed mb-4">
-                    We created a home experience centered on a gentle "How are you today?" prompt and progressive disclosure. Onboarding allowed users to set boundaries (what to be reminded about, when). The therapist-matching flow used cards and filters without feeling like a form. We introduced a consistent design system with a sage-and-cream palette and rounded, approachable components.
-                </p>
-            </section>
-
-            <section class="mb-16">
-                <h2 class="font-serif text-2xl font-bold mb-6">Results</h2>
-                <div class="grid sm:grid-cols-3 gap-6">
-                    <div class="p-6 bg-white rounded-2xl border border-gray-100">
-                        <p class="font-serif text-3xl font-bold text-sage">+52%</p>
-                        <p class="text-sm text-secondary mt-1">Weekly active users</p>
+            <!-- Next page: Welcome → Homepage → Pinjalo -->
+            <section class="mb-20 md:mb-28">
+                <div class="grid md:grid-cols-3 gap-8 md:gap-10">
+                    <div class="text-center md:text-left">
+                        <figure class="rounded-2xl overflow-hidden mb-4 bg-white">
+                            <img src="public/Seamount f/Welcome picture.jpg" alt="Welcome page" class="w-full h-auto object-cover aspect-[9/19] object-top">
+                        </figure>
+                        <p class="font-medium text-primary">Welcome page</p>
                     </div>
-                    <div class="p-6 bg-white rounded-2xl border border-gray-100">
-                        <p class="font-serif text-3xl font-bold text-sage">78%</p>
-                        <p class="text-sm text-secondary mt-1">Completed first session</p>
+                    <div class="text-center md:text-left">
+                        <figure class="rounded-2xl overflow-hidden mb-4 bg-white">
+                            <img src="public/Seamount f/Homepage 1 picture .jpg" alt="Homepage" class="w-full h-auto object-cover aspect-[9/19] object-top">
+                        </figure>
+                        <p class="font-medium text-primary">The homepage streamlines species discovery through direct search, AI identification, and recent search history.</p>
                     </div>
-                    <div class="p-6 bg-white rounded-2xl border border-gray-100">
-                        <p class="font-serif text-3xl font-bold text-sage">4.9★</p>
-                        <p class="text-sm text-secondary mt-1">App store rating</p>
+                    <div class="text-center md:text-left">
+                        <figure class="rounded-2xl overflow-hidden mb-4 bg-white">
+                            <img src="public/Seamount f/Pinjalo 1.jpg" alt="Latest search" class="w-full h-auto object-cover aspect-[9/19] object-top">
+                        </figure>
+                        <p class="font-medium text-primary">Quick view of the latest search</p>
                     </div>
                 </div>
             </section>
 
-            <section class="pt-8 border-t border-gray-200">
+            <!-- About the App -->
+            <section class="mb-20 md:mb-28">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-8">About the App</h2>
+                <p class="text-secondary leading-relaxed mb-6 max-w-3xl">
+                    Seamount Fishes App is an interactive guide for identifying reef fishes in the Indian Ocean. Designed for researchers, students, divers, and enthusiasts, it combines scientific accuracy with intuitive design.
+                </p>
+                <p class="text-secondary leading-relaxed mb-6 max-w-3xl">
+                    Users can identify species in real time, explore a rich database with images and details, and access trusted resources like FishBase and the IUCN Red List. The app works online and offline, making research and exploration seamless.
+                </p>
+                <p class="text-secondary leading-relaxed max-w-3xl">
+                    By merging technology with marine science, it's more than a guide—it's an educational tool that sparks curiosity and awareness about marine life.
+                </p>
+                <div class="mt-10 p-6 md:p-8 rounded-2xl border-l-4 border-accent bg-cream shadow-sm">
+                    <p class="font-serif text-xl md:text-2xl text-primary leading-relaxed">
+                        The main goal of this project was to reimagine the app into a powerful, easy-to-use digital companion that empowers users to explore India's rich marine biodiversity — both online and offline.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Key Features + 2 camera images side by side -->
+            <section class="mb-20 md:mb-28">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-8">Key Features</h2>
+                <ul class="grid sm:grid-cols-2 gap-x-10 gap-y-6 text-secondary leading-relaxed mb-10">
+                    <li class="flex gap-3 items-start">
+                        <span class="text-accent shrink-0 mt-0.5"><i data-lucide="check-circle" class="w-5 h-5"></i></span>
+                        <span><strong class="text-primary">AI-Based Fish Identification:</strong> Capture fish photos in real-time and identify species using an inbuilt AI trained on existing databases.</span>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="text-accent shrink-0 mt-0.5"><i data-lucide="check-circle" class="w-5 h-5"></i></span>
+                        <span><strong class="text-primary">Offline Database Access:</strong> Identify fishes and access species data even without an internet connection.</span>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="text-accent shrink-0 mt-0.5"><i data-lucide="check-circle" class="w-5 h-5"></i></span>
+                        <span><strong class="text-primary">Ask AI Assistant:</strong> Get quick, field-based support for uncertain fish observations.</span>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="text-accent shrink-0 mt-0.5"><i data-lucide="check-circle" class="w-5 h-5"></i></span>
+                        <span><strong class="text-primary">Scientific Resource Integration:</strong> Direct links to FishBase and IUCN Red List provide instant access to reliable external data.</span>
+                    </li>
+                    <li class="flex gap-3 items-start sm:col-span-2">
+                        <span class="text-accent shrink-0 mt-0.5"><i data-lucide="check-circle" class="w-5 h-5"></i></span>
+                        <span><strong class="text-primary">Modern, Intuitive Interface:</strong> A clean, ocean-inspired interface designed for both beginners and experts.</span>
+                    </li>
+                </ul>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <figure class="rounded-2xl overflow-hidden bg-white">
+                        <img src="public/Seamount f/Camera 1.jpg" alt="Camera identification flow" class="w-full h-auto object-cover">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden bg-white">
+                        <img src="public/Seamount f/camera 2.jpg" alt="Camera and identification" class="w-full h-auto object-cover">
+                    </figure>
+                </div>
+            </section>
+
+            <!-- User Research -->
+            <section class="mb-20 md:mb-28">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6">User Research</h2>
+                <p class="text-secondary leading-relaxed mb-10 max-w-3xl">
+                    Before beginning the redesign, a thorough user research phase was conducted to understand the needs, challenges, and goals of the target audience. The objective was to uncover usability gaps and ensure the new design aligned with real-world usage in marine environments.
+                </p>
+                <div class="grid md:grid-cols-2 gap-x-10 gap-y-8 md:gap-x-12">
+                    <div>
+                        <h3 class="font-serif text-xl font-semibold mb-5 text-primary">Research Methods</h3>
+                        <ul class="space-y-4 text-secondary leading-relaxed">
+                            <li class="flex gap-3 items-start">
+                                <span class="text-accent shrink-0 mt-0.5"><i data-lucide="circle" class="w-2 h-2"></i></span>
+                                <span><strong class="text-primary">User Interviews:</strong> Conducted with marine biologists, research students, and diving instructors to learn about current workflows and frustrations.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-accent shrink-0 mt-0.5"><i data-lucide="circle" class="w-2 h-2"></i></span>
+                                <span><strong class="text-primary">Contextual Inquiry:</strong> Observed how users interact with the app in the field, particularly in low-connectivity environments.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-accent shrink-0 mt-0.5"><i data-lucide="circle" class="w-2 h-2"></i></span>
+                                <span><strong class="text-primary">Surveys:</strong> Distributed to marine enthusiasts and students to understand their expectations from a fish identification tool.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-accent shrink-0 mt-0.5"><i data-lucide="circle" class="w-2 h-2"></i></span>
+                                <span><strong class="text-primary">Heuristic Evaluation:</strong> Reviewed the existing app to identify issues in navigation, visual hierarchy, and interaction design.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-xl font-semibold mb-5 text-primary">Key Insights</h3>
+                        <ul class="space-y-4 text-secondary leading-relaxed">
+                            <li class="flex gap-3 items-start">
+                                <span class="text-accent shrink-0 mt-0.5"><i data-lucide="circle" class="w-2 h-2"></i></span>
+                                <span>Users often face poor visibility and limited connectivity while identifying species underwater or in coastal areas.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-accent shrink-0 mt-0.5"><i data-lucide="circle" class="w-2 h-2"></i></span>
+                                <span>The existing app lacked visual clarity and consistent navigation, leading to confusion in species search.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-accent shrink-0 mt-0.5"><i data-lucide="circle" class="w-2 h-2"></i></span>
+                                <span>Users wanted a faster AI-assisted identification tool and simplified species comparison.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-accent shrink-0 mt-0.5"><i data-lucide="circle" class="w-2 h-2"></i></span>
+                                <span>Researchers needed quick access to scientific sources and the ability to store and share offline data for collaboration.</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-accent shrink-0 mt-0.5"><i data-lucide="circle" class="w-2 h-2"></i></span>
+                                <span>Research students and enthusiasts desired a more visually appealing interface with simplified terminology.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Personas -->
+            <section class="mb-20 md:mb-28">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-10">User Personas</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <figure class="rounded-2xl overflow-hidden bg-white">
+                        <img src="public/Seamount f/persona 1.png" alt="Persona 1" class="w-full h-auto object-cover">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden bg-white">
+                        <img src="public/Seamount f/persona 2.png" alt="Persona 2" class="w-full h-auto object-cover">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden bg-white">
+                        <img src="public/Seamount f/persona 3.png" alt="Persona 3" class="w-full h-auto object-cover">
+                    </figure>
+                </div>
+            </section>
+
+            <!-- Design System -->
+            <section class="mb-20 md:mb-28">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-10">Design System</h2>
+                <div class="space-y-8">
+                    <figure class="rounded-2xl overflow-hidden bg-white">
+                        <img src="public/Seamount f/DS COLOR.png" alt="Design system — Color" class="w-full h-auto object-cover">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden bg-white">
+                        <img src="public/Seamount f/DS ICONS.jpg" alt="Design system — Icons" class="w-full h-auto object-cover">
+                    </figure>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 mt-8">
+                    <figure class="rounded-2xl overflow-hidden bg-white">
+                        <img src="public/Seamount f/DS TYPO.jpg" alt="Design system — Typography" class="w-full h-auto object-cover">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden bg-white">
+                        <img src="public/Seamount f/DS LG.jpg" alt="Design system — Logo" class="w-full h-auto object-cover">
+                    </figure>
+                </div>
+            </section>
+
+            <!-- Design Goals -->
+            <section class="mb-20 md:mb-28">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-8">Design Goals</h2>
+                <p class="text-secondary mb-10 max-w-3xl">Based on user insights, the redesign focused on the following principles:</p>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="p-5 rounded-xl bg-cream border border-gray-100 shadow-sm">
+                        <p class="font-semibold text-primary">Intuitiveness</p>
+                        <p class="text-sm text-secondary mt-1">Simplify the user flow for species identification and search.</p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-cream border border-gray-100 shadow-sm">
+                        <p class="font-semibold text-primary">Clarity</p>
+                        <p class="text-sm text-secondary mt-1">Use clear visual hierarchies and color-coded species indicators.</p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-cream border border-gray-100 shadow-sm">
+                        <p class="font-semibold text-primary">Accessibility</p>
+                        <p class="text-sm text-secondary mt-1">Ensure readability and usability in outdoor/underwater lighting.</p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-cream border border-gray-100 shadow-sm">
+                        <p class="font-semibold text-primary">Offline Reliability</p>
+                        <p class="text-sm text-secondary mt-1">Enable full functionality without internet dependency.</p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-cream border border-gray-100 shadow-sm">
+                        <p class="font-semibold text-primary">Scientific Trust</p>
+                        <p class="text-sm text-secondary mt-1">Maintain data integrity by linking with verified databases.</p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-cream border border-gray-100 shadow-sm">
+                        <p class="font-semibold text-primary">Engagement</p>
+                        <p class="text-sm text-secondary mt-1">Create a visually immersive experience that reflects oceanic life.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Design Journey -->
+            <section class="mb-20 md:mb-28">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-10">Design Journey</h2>
+                <div class="space-y-12">
+                    <div class="flex gap-4">
+                        <span class="text-accent font-bold shrink-0">a)</span>
+                        <div>
+                            <h3 class="font-serif text-xl font-semibold mb-2">Information Architecture</h3>
+                            <p class="text-secondary leading-relaxed mb-4">Reorganized the app structure to prioritize:</p>
+                            <ul class="list-disc list-inside text-secondary space-y-1">
+                                <li>Quick identification</li>
+                                <li>Easy species browsing</li>
+                                <li>Seamless access to AI, search, and offline data</li>
+                                <li>A simplified bottom navigation bar replaced nested menus for faster interaction.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-accent font-bold shrink-0">b)</span>
+                        <div>
+                            <h3 class="font-serif text-xl font-semibold mb-2">User Flow Development</h3>
+                            <p class="text-secondary leading-relaxed">Created detailed task flows for:</p>
+                            <ul class="list-disc list-inside text-secondary space-y-1 mt-2">
+                                <li>Capturing a fish photo → Identifying species → Viewing detailed info</li>
+                                <li>Searching fish by color, shape, or region</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-accent font-bold shrink-0">c)</span>
+                        <div>
+                            <h3 class="font-serif text-xl font-semibold mb-2">Wireframing</h3>
+                            <p class="text-secondary leading-relaxed mb-4">Low-fidelity wireframes mapped key journeys such as:</p>
+                            <ul class="list-disc list-inside text-secondary space-y-1">
+                                <li>Home (Explore Species)</li>
+                                <li>AI Identification</li>
+                                <li>Species Details Page</li>
+                                <li>Offline Database</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-accent font-bold shrink-0">d)</span>
+                        <div>
+                            <h3 class="font-serif text-xl font-semibold mb-2">Visual Redesign</h3>
+                            <p class="text-secondary leading-relaxed mb-4">Adopted an oceanic theme inspired by underwater gradients and natural blues. Icons were made bold and intuitive; typography emphasized readability.</p>
+                            <p class="text-secondary leading-relaxed mb-2">Each fish entry now features:</p>
+                            <ul class="list-disc list-inside text-secondary space-y-1">
+                                <li>Species image</li>
+                                <li>Common & scientific name</li>
+                                <li>Identification markers (fin shape, color patterns, habitat)</li>
+                                <li>Quick access buttons to FishBase/IUCN.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-accent font-bold shrink-0">e)</span>
+                        <div>
+                            <h3 class="font-serif text-xl font-semibold mb-2">Usability Testing</h3>
+                            <p class="text-secondary leading-relaxed">Conducted A/B testing with 8 participants from the research community.</p>
+                            <ul class="list-disc list-inside text-secondary space-y-1 mt-2">
+                                <li>90% found the new navigation faster to use.</li>
+                                <li>70% requested a "Compare Two Species" option (added post-feedback).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Final Outcome -->
+            <section class="mb-20 md:mb-28">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6">Final Outcome</h2>
+                <p class="text-secondary leading-relaxed mb-10 max-w-3xl">
+                    The redesigned Seamount Fishes App offers a cohesive and user-friendly experience tailored to real-world marine contexts. It merges scientific depth with intuitive design, enabling users to identify, learn, and share fish species effortlessly.
+                </p>
+                <p class="font-medium text-primary mb-4">Key improvements include:</p>
+                <ul class="space-y-3 text-secondary leading-relaxed mb-12">
+                    <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>Reduced identification time by 40% with streamlined AI workflow.</li>
+                    <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>Improved data visibility through better layout and typography.</li>
+                    <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>Enhanced offline usability and faster navigation across all features.</li>
+                    <li class="flex gap-2"><i data-lucide="check" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>Visually engaging design reflecting the serenity and vibrancy of underwater life.</li>
+                </ul>
+            </section>
+
+            <!-- Sliding gallery 1ST–13TH -->
+            <section class="mb-20 md:mb-28">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-10">Screens & Flows</h2>
+                <div class="slider-wrap">
+                    <button type="button" class="slider-arrow left" id="slider-prev" aria-label="Scroll left">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <div class="slider-track pb-4" id="seamount-slider">
+                        <img src="public/Seamount f/1ST.jpg" alt="Screen 1">
+                        <img src="public/Seamount f/2ND.jpeg" alt="Screen 2">
+                        <img src="public/Seamount f/3RD.jpg" alt="Screen 3">
+                        <img src="public/Seamount f/4TH.jpg" alt="Screen 4">
+                        <img src="public/Seamount f/5TH.jpeg" alt="Screen 5">
+                        <img src="public/Seamount f/6TH.jpeg" alt="Screen 6">
+                        <img src="public/Seamount f/7TH.jpg" alt="Screen 7">
+                        <img src="public/Seamount f/8TH.jpeg" alt="Screen 8">
+                        <img src="public/Seamount f/9TH.jpeg" alt="Screen 9">
+                        <img src="public/Seamount f/10TH.jpg" alt="Screen 10">
+                        <img src="public/Seamount f/11TH.jpeg" alt="Screen 11">
+                        <img src="public/Seamount f/12TH.jpeg" alt="Screen 12">
+                        <img src="public/Seamount f/13TH.jpeg" alt="Screen 13">
+                    </div>
+                    <button type="button" class="slider-arrow right" id="slider-next" aria-label="Scroll right">
+                        <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Reflection -->
+            <section class="mb-20 md:mb-28">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-8">Reflection</h2>
+                <div class="max-w-3xl space-y-6 text-secondary leading-relaxed">
+                    <p>
+                        This project was a deep dive into UX for field-based scientific applications. It emphasized the importance of designing for limited connectivity, data credibility, and visual legibility under outdoor conditions.
+                    </p>
+                    <p>
+                        The experience strengthened my skills in research synthesis, information design, and creating intuitive interfaces for niche scientific audiences. The Seamount Fishes App now stands as a bridge between science and technology — helping users explore, understand, and appreciate the vast biodiversity beneath India's seas.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Final Prototype Video (full-bleed black) -->
+            <section class="mb-20 w-screen relative left-1/2 -translate-x-1/2 py-12 md:py-16 bg-black">
+                <div class="max-w-6xl mx-auto px-6">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold mb-10 text-white">Final Prototype</h2>
+                    <div class="relative rounded-2xl overflow-hidden bg-black w-full max-w-md mx-auto aspect-[9/16]">
+                        <video class="absolute inset-0 w-full h-full object-cover bg-black" controls poster="public/Seamount f/Welcome picture.jpg">
+                            <source src="public/Seamount f/VIDEO.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </section>
+
+            <section class="pt-12 border-t border-gray-200">
                 <a href="index.html#work" class="inline-flex items-center gap-2 text-primary font-medium hover:text-accent transition-colors border-b-2 border-primary hover:border-accent pb-1">
                     <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to All Projects
                 </a>
@@ -124,6 +437,23 @@
         </div>
     </footer>
 
-    <script>lucide.createIcons();</script>
+    <script>
+        lucide.createIcons();
+
+        // Screens & Flows slider arrows
+        (function() {
+            var slider = document.getElementById('seamount-slider');
+            var prevBtn = document.getElementById('slider-prev');
+            var nextBtn = document.getElementById('slider-next');
+            if (!slider || !prevBtn || !nextBtn) return;
+            var step = 320;
+            prevBtn.addEventListener('click', function() {
+                slider.scrollBy({ left: -step, behavior: 'smooth' });
+            });
+            nextBtn.addEventListener('click', function() {
+                slider.scrollBy({ left: step, behavior: 'smooth' });
+            });
+        })();
+    </script>
 </body>
 </html>
