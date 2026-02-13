@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIGRANSTAT — Migraine Management App | Akshara Nair</title>
+    <meta name="description" content="Case study: MIGRANSTAT — an innovative app designed to empower individuals battling migraines through tracking, pattern recognition, and personalized recommendations.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['DM Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        migranstat: {
+                            accent: '#22d3ee',
+                            soft: '#67e8f9',
+                            dark: '#0a0d14',
+                            bg: '#070A12',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .migranstat-nav {
+            backdrop-filter: blur(12px);
+            background: rgba(7, 10, 18, 0.9);
+        }
+        .migranstat-nav .nav-link::after {
+            background: #22d3ee;
+        }
+        .migranstat-glow {
+            /* shadow removed */
+        }
+        .migranstat-card {
+            background: linear-gradient(135deg, rgba(10, 14, 24, 0.8) 0%, rgba(5, 7, 15, 0.95) 100%);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+        }
+        .migranstat-card:hover {
+            border-color: rgba(34, 211, 238, 0.4);
+            box-shadow: 0 0 40px rgba(34, 211, 238, 0.08);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #22d3ee 0%, #67e8f9 50%, #a5f3fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .migranstat-carousel-wrap { position: relative; overflow: hidden; }
+        .migranstat-carousel-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth; }
+        .migranstat-carousel-track::-webkit-scrollbar { display: none; }
+        .migranstat-carousel-slide { flex: 0 0 100%; scroll-snap-align: start; width: 100%; }
+        .migranstat-carousel-slide img { width: 100%; max-width: 400px; margin: 0 auto 1.5rem; display: block; border-radius: 1rem; object-fit: contain; max-height: 55vh; }
+        .migranstat-carousel-arrow { position: absolute; top: 28%; transform: translateY(-50%); z-index: 10; width: 48px; height: 48px; border-radius: 50%; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(34, 211, 238, 0.3); display: flex; align-items: center; justify-content: center; cursor: pointer; color: #22d3ee; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+        .migranstat-carousel-arrow:hover { background: rgba(34, 211, 238, 0.15); color: #67e8f9; border-color: #22d3ee; }
+        .migranstat-carousel-arrow.left { left: -12px; }
+        .migranstat-carousel-arrow.right { right: -12px; }
+        @media (max-width: 640px) { .migranstat-carousel-arrow { width: 40px; height: 40px; top: 22%; } .migranstat-carousel-arrow.left { left: 4px; } .migranstat-carousel-arrow.right { right: 4px; } }
+    </style>
+</head>
+<body class="bg-[#070A12] text-gray-100 antialiased overflow-x-hidden">
+
+    <nav class="fixed w-full top-0 z-50 transition-all duration-300 migranstat-nav border-b border-white/5" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="index.html" class="font-serif text-2xl font-bold tracking-tight text-white hover:text-migranstat-accent transition-colors">AN.</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="index.html#work" class="nav-link text-sm font-medium tracking-wide uppercase text-gray-300 hover:text-white">Work</a>
+                <a href="index.html#about" class="nav-link text-sm font-medium tracking-wide uppercase text-gray-300 hover:text-white">About</a>
+                <a href="index.html#services" class="nav-link text-sm font-medium tracking-wide uppercase text-gray-300 hover:text-white">Services</a>
+                <a href="index.html#contact" class="nav-link text-sm font-medium tracking-wide uppercase text-gray-300 hover:text-white">Contact</a>
+            </div>
+            <a href="index.html#work" class="inline-flex items-center gap-2 text-sm font-medium text-gray-400 hover:text-migranstat-accent transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Work
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- Hero + MG1 Image -->
+            <header class="mb-20 md:mb-28">
+                <div class="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-start md:items-start">
+                    <div>
+                        <span class="inline-block text-xs uppercase tracking-wider text-migranstat-accent border border-migranstat-accent/60 px-4 py-1.5 rounded-full mb-6">Health & Wellness</span>
+                        <h1 class="font-serif text-4xl md:text-7xl font-bold leading-tight mb-6">
+                            <span class="text-gradient">MIGRANSTAT</span>
+                        </h1>
+                        <p class="text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed mb-8">
+                            Empowering individuals battling migraines through intelligent tracking, pattern recognition, and personalized recommendations.
+                        </p>
+                        <div class="max-w-3xl space-y-6">
+                            <p class="text-gray-400 leading-relaxed">
+                                Welcome to the forefront of migraine management with MIGRANSTAT—an innovative app that combines technological innovation with human-centered design to ease the burden of migraine sufferers worldwide. MIGRANSTAT is more than an app; it's a comprehensive toolkit built to understand, analyze, and reduce migraine triggers.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed">
+                                By tracking key factors such as sleep patterns, dietary habits, and environmental conditions like temperature changes, MIGRANSTAT provides valuable insights into migraine episodes. Users can log duration, intensity, and symptoms—creating a rich dataset for meaningful analysis.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed">
+                                Beyond data tracking, MIGRANSTAT leverages advanced algorithms to uncover patterns in users' lifestyles, identifying triggers such as stress, diet, weather shifts, and sleep disturbances. With these insights, the app delivers personalized recommendations and actionable strategies—from stress management techniques to dietary adjustments and improved sleep hygiene—supporting users on their journey toward migraine relief.
+                            </p>
+                        </div>
+                    </div>
+                    <figure class="rounded-2xl overflow-hidden md:ml-auto md:mt-0 order-first md:order-last shrink-0">
+                        <img src="public/MIGRANSTAT/MG1.png" alt="MIGRANSTAT app interface" class="w-full h-auto object-cover max-w-[280px] md:max-w-[320px]">
+                    </figure>
+                </div>
+            </header>
+
+            <!-- Key Features -->
+            <section class="mb-24 md:mb-32">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12 text-white">Key Features</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="migranstat-card p-6 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-migranstat-accent/20 flex items-center justify-center mb-4">
+                            <i data-lucide="book-open" class="w-6 h-6 text-migranstat-accent"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-semibold text-white mb-2">Intuitive Diary Interface</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Users can effortlessly log details about their migraine attacks, including duration, intensity, associated symptoms, and potential triggers.</p>
+                    </div>
+                    <div class="migranstat-card p-6 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-migranstat-accent/20 flex items-center justify-center mb-4">
+                            <i data-lucide="activity" class="w-6 h-6 text-migranstat-accent"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-semibold text-white mb-2">Comprehensive Tracking</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Monitor sleep patterns, dietary intake, and environmental factors such as temperature variations to identify correlations with migraine episodes.</p>
+                    </div>
+                    <div class="migranstat-card p-6 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-migranstat-accent/20 flex items-center justify-center mb-4">
+                            <i data-lucide="git-branch" class="w-6 h-6 text-migranstat-accent"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-semibold text-white mb-2">Pattern Recognition</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Advanced algorithms analyze user data to identify recurring patterns and potential triggers—stress, diet, weather, sleep disturbances.</p>
+                    </div>
+                    <div class="migranstat-card p-6 rounded-2xl">
+                        <div class="w-12 h-12 rounded-xl bg-migranstat-accent/20 flex items-center justify-center mb-4">
+                            <i data-lucide="sparkles" class="w-6 h-6 text-migranstat-accent"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-semibold text-white mb-2">Personalized Recommendations</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Tailored advice and lifestyle recommendations—stress management, dietary modifications, and sleep hygiene practices.</p>
+                    </div>
+                    <div class="migranstat-card p-6 rounded-2xl sm:col-span-2 lg:col-span-1">
+                        <div class="w-12 h-12 rounded-xl bg-migranstat-accent/20 flex items-center justify-center mb-4">
+                            <i data-lucide="trending-up" class="w-6 h-6 text-migranstat-accent"></i>
+                        </div>
+                        <h3 class="font-serif text-lg font-semibold text-white mb-2">Progress Tracking</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed">Visualize improvements in migraine frequency and severity, and track the effectiveness of implemented lifestyle changes over time.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Research -->
+            <section class="mb-24 md:mb-32">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-8 text-white">User Research</h2>
+                <p class="text-gray-400 leading-relaxed max-w-3xl mb-12">
+                    Before diving into the UI/UX design process, extensive user research was conducted to understand the needs, pain points, and preferences of migraine sufferers. Through surveys, interviews, and usability tests, valuable insights were gathered regarding the features and functionalities desired in a migraine tracking app. Key findings highlighted the importance of <strong class="text-gray-200">simplicity</strong>, <strong class="text-gray-200">customization options</strong>, and <strong class="text-gray-200">real-time data visualization</strong> for effective migraine management.
+                </p>
+                <h3 class="font-serif text-xl font-semibold text-white mb-6">Questionnaire</h3>
+                <figure class="rounded-2xl overflow-hidden ">
+                    <img src="public/MIGRANSTAT/QUESTION 1 .png" alt="MIGRANSTAT user research questionnaire" class="w-full h-auto object-cover">
+                </figure>
+            </section>
+
+            <!-- Design Goals -->
+            <section class="mb-24 md:mb-32">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-8 text-white">Design Goals</h2>
+                <p class="text-gray-400 leading-relaxed max-w-3xl mb-12">
+                    Based on the user research findings, the following design goals were established for MIGRANSTAT:
+                </p>
+                <div class="grid sm:grid-cols-2 gap-4 mb-16">
+                    <div class="flex gap-4 p-4 rounded-xl migranstat-card">
+                        <i data-lucide="compass" class="w-5 h-5 text-migranstat-accent shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-medium text-white mb-1">Intuitiveness</h4>
+                            <p class="text-gray-400 text-sm">Ensure the app is easy to navigate and understand, even for users with limited technical expertise.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 rounded-xl migranstat-card">
+                        <i data-lucide="sliders" class="w-5 h-5 text-migranstat-accent shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-medium text-white mb-1">Customization</h4>
+                            <p class="text-gray-400 text-sm">Provide users the ability to customize tracking parameters and preferences according to their individual needs.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 rounded-xl migranstat-card">
+                        <i data-lucide="zap" class="w-5 h-5 text-migranstat-accent shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-medium text-white mb-1">Real-time Feedback</h4>
+                            <p class="text-gray-400 text-sm">Enable users to receive immediate feedback on their tracked data and insights into potential migraine triggers.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 rounded-xl migranstat-card">
+                        <i data-lucide="user" class="w-5 h-5 text-migranstat-accent shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-medium text-white mb-1">Personalization</h4>
+                            <p class="text-gray-400 text-sm">Deliver personalized recommendations and tips tailored to each user's specific migraine patterns and lifestyle factors.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 rounded-xl migranstat-card sm:col-span-2">
+                        <i data-lucide="accessibility" class="w-5 h-5 text-migranstat-accent shrink-0 mt-0.5"></i>
+                        <div>
+                            <h4 class="font-medium text-white mb-1">Accessibility</h4>
+                            <p class="text-gray-400 text-sm">Ensure accessibility features are integrated to accommodate users with disabilities or impairments.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- DS1 + DST Side by Side -->
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <figure class="rounded-2xl overflow-hidden ">
+                        <img src="public/MIGRANSTAT/DS1.jpg" alt="MIGRANSTAT design system" class="w-full h-auto object-cover">
+                    </figure>
+                    <figure class="rounded-2xl overflow-hidden ">
+                        <img src="public/MIGRANSTAT/DST.jpg" alt="MIGRANSTAT design tokens" class="w-full h-auto object-cover">
+                    </figure>
+                </div>
+                <!-- DS2 -->
+                <figure class="rounded-2xl overflow-hidden ">
+                    <img src="public/MIGRANSTAT/DS2.jpg" alt="MIGRANSTAT design system components" class="w-full h-auto object-cover">
+                </figure>
+            </section>
+
+            <!-- About the App - Single Image + Content Slideshow -->
+            <section class="mb-24 md:mb-32">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-10 text-white">About the App</h2>
+                <p class="text-gray-400 leading-relaxed mb-12 max-w-3xl">
+                    MIGRANSTAT guides users through calendar management, personal insights, migraine tracking, and daily recommendations. Browse the app screens and flows below.
+                </p>
+                <div class="migranstat-carousel-wrap">
+                    <button type="button" class="migranstat-carousel-arrow left" id="migranstat-carousel-prev" aria-label="Previous screen">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <div class="migranstat-carousel-track" id="migranstat-carousel">
+                        <div class="migranstat-carousel-slide px-2">
+                            <img src="public/MIGRANSTAT/S1.png" alt="Calendar & Inquiry Tabs">
+                            <div class="migranstat-card p-6 rounded-xl max-w-2xl mx-auto">
+                                <h4 class="font-semibold text-white mb-3">Calendar & Inquiry Tabs</h4>
+                                <p class="text-gray-400 leading-relaxed">Upon launching the app, users see the calendar and inquiry tabs. The notes section lets users record breakfast, lunch, and dinner to identify migraine triggers. Local ambient temperatures are tracked to understand the relationship between temperature changes and migraine episodes.</p>
+                            </div>
+                        </div>
+                        <div class="migranstat-carousel-slide px-2">
+                            <img src="public/MIGRANSTAT/S2.png" alt="Me Tab — Personal Dashboard">
+                            <div class="migranstat-card p-6 rounded-xl max-w-2xl mx-auto">
+                                <h4 class="font-semibold text-white mb-3">Me Tab — Personal Dashboard</h4>
+                                <p class="text-gray-400 leading-relaxed">Users get a snapshot of personal data, energy levels, and statistical insights, plus the ability to monitor factors contributing to their most recent migraine episode.</p>
+                            </div>
+                        </div>
+                        <div class="migranstat-carousel-slide px-2">
+                            <img src="public/MIGRANSTAT/S3.png" alt="Calendar Tab — Monthly Overview">
+                            <div class="migranstat-card p-6 rounded-xl max-w-2xl mx-auto">
+                                <h4 class="font-semibold text-white mb-3">Calendar Tab — Monthly Overview</h4>
+                                <p class="text-gray-400 leading-relaxed">The calendar tab provides a comprehensive overview of the preceding month, including pertinent information regarding the user's most recent migraine episode.</p>
+                            </div>
+                        </div>
+                        <div class="migranstat-carousel-slide px-2">
+                            <img src="public/MIGRANSTAT/S4.png" alt="Stats Tab — Attack Tracking">
+                            <div class="migranstat-card p-6 rounded-xl max-w-2xl mx-auto">
+                                <h4 class="font-semibold text-white mb-3">Stats Tab — Attack Tracking</h4>
+                                <p class="text-gray-400 leading-relaxed">Shows how many hours have passed since the last migraine attack and offers an option to track a new migraine attack.</p>
+                            </div>
+                        </div>
+                        <div class="migranstat-carousel-slide px-2">
+                            <img src="public/MIGRANSTAT/S5.png" alt="Tips Tab — Daily Recommendations">
+                            <div class="migranstat-card p-6 rounded-xl max-w-2xl mx-auto">
+                                <h4 class="font-semibold text-white mb-3">Tips Tab — Daily Recommendations</h4>
+                                <p class="text-gray-400 leading-relaxed">A curated selection of daily recommendations aimed at preventing or mitigating migraine severity, derived from analysis of user data before and after each migraine occurrence.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="migranstat-carousel-arrow right" id="migranstat-carousel-next" aria-label="Next screen">
+                        <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                <div class="flex justify-center gap-2 mt-6" id="migranstat-dots" aria-hidden="true"></div>
+            </section>
+
+            <!-- Final Prototype Video -->
+            <section class="mb-20">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold mb-8 text-white">Final Prototype</h2>
+                <div class="rounded-2xl overflow-hidden">
+                    <video controls class="w-full aspect-video bg-black" poster="">
+                        <source src="public/MIGRANSTAT/mgfinal.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </section>
+
+            <!-- Back Link -->
+            <section class="pt-12 border-t border-white/10">
+                <a href="index.html#work" class="inline-flex items-center gap-2 text-migranstat-accent font-medium hover:text-migranstat-soft transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to All Projects
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <footer class="py-8 px-6 border-t border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-gray-500">© 2024 Akshara Nair. All rights reserved.</p>
+            <a href="index.html#contact" class="text-sm text-gray-500 hover:text-migranstat-accent transition-colors">Get in Touch</a>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // About the App carousel - single image + content per slide
+        (function() {
+            var carousel = document.getElementById('migranstat-carousel');
+            var prevBtn = document.getElementById('migranstat-carousel-prev');
+            var nextBtn = document.getElementById('migranstat-carousel-next');
+            var dotsEl = document.getElementById('migranstat-dots');
+            if (!carousel || !prevBtn || !nextBtn) return;
+            var slides = carousel.querySelectorAll('.migranstat-carousel-slide');
+            var total = slides.length;
+            var slideWidth = carousel.offsetWidth;
+            var currentIndex = 0;
+
+            function goToSlide(index) {
+                currentIndex = Math.max(0, Math.min(index, total - 1));
+                carousel.scrollTo({ left: currentIndex * slideWidth, behavior: 'smooth' });
+                updateDots();
+            }
+
+            function updateDots() {
+                if (!dotsEl) return;
+                dotsEl.innerHTML = '';
+                for (var i = 0; i < total; i++) {
+                    var dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'w-2 h-2 rounded-full transition-colors ' + (i === currentIndex ? 'bg-migranstat-accent' : 'bg-gray-600 hover:bg-gray-500');
+                    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+                    dot.addEventListener('click', function() { goToSlide(Number(this.dataset.index)); });
+                    dot.dataset.index = i;
+                    dotsEl.appendChild(dot);
+                }
+            }
+
+            prevBtn.addEventListener('click', function() { goToSlide(currentIndex - 1); });
+            nextBtn.addEventListener('click', function() { goToSlide(currentIndex + 1); });
+
+            carousel.addEventListener('scroll', function() {
+                var idx = Math.round(carousel.scrollLeft / slideWidth);
+                if (idx !== currentIndex) {
+                    currentIndex = idx;
+                    updateDots();
+                }
+            });
+
+            window.addEventListener('resize', function() {
+                slideWidth = carousel.offsetWidth;
+            });
+
+            updateDots();
+        })();
+    </script>
+</body>
+</html>
