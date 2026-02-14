@@ -155,22 +155,22 @@
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
-        
-        <!-- Mobile Menu -->
-        <div class="md:hidden fixed inset-0 bg-cream z-40 transform translate-x-full transition-transform duration-300" id="mobile-menu">
-            <div class="flex flex-col items-center justify-center h-full gap-8">
-                <a href="#work" class="mobile-link font-serif text-3xl">Work</a>
-                <a href="#about" class="mobile-link font-serif text-3xl">About</a>
-                <a href="#experience" class="mobile-link font-serif text-3xl">Experience</a>
-                <a href="#education" class="mobile-link font-serif text-3xl">Education</a>
-                <a href="#services" class="mobile-link font-serif text-3xl">Services</a>
-                <a href="#contact" class="mobile-link font-serif text-3xl">Contact</a>
-                <button class="absolute top-6 right-6" id="close-menu">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-        </div>
     </nav>
+
+    <!-- Mobile Menu (outside nav for proper z-index stacking) -->
+    <div class="md:hidden fixed inset-0 bg-cream z-[9999] transform translate-x-full transition-transform duration-300" id="mobile-menu">
+        <div class="flex flex-col items-center justify-center h-full gap-8">
+            <a href="#work" class="mobile-link font-serif text-3xl">Work</a>
+            <a href="#about" class="mobile-link font-serif text-3xl">About</a>
+            <a href="#experience" class="mobile-link font-serif text-3xl">Experience</a>
+            <a href="#education" class="mobile-link font-serif text-3xl">Education</a>
+            <a href="#services" class="mobile-link font-serif text-3xl">Services</a>
+            <a href="#contact" class="mobile-link font-serif text-3xl">Contact</a>
+            <button class="absolute top-6 right-6" id="close-menu">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6">
@@ -612,16 +612,24 @@
 
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.remove('translate-x-full');
+            document.body.style.overflow = 'hidden';
         });
 
-        closeMenuBtn.addEventListener('click', () => {
+        function closeMobileMenu() {
             mobileMenu.classList.add('translate-x-full');
-        });
+            document.body.style.overflow = '';
+        }
+
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
 
         mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('translate-x-full');
-            });
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                closeMobileMenu();
+            }
         });
 
         // Smooth scroll for anchor links
