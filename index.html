@@ -8,6 +8,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -51,6 +52,23 @@
         
         .project-card:hover img {
             transform: scale(1.05);
+        }
+
+        /* 3D tilt cards */
+        .project-card,
+        #services .group {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .project-card .project-overlay,
+        .project-card img,
+        #services .group > * {
+            transform-style: preserve-3d;
+        }
+        .scroll-3d-section { transform-style: preserve-3d; perspective: 1200px; }
+        .scroll-3d-item { transform-style: preserve-3d; transition: transform 0.25s ease-out; }
+        #work .flex.fade-in, #experience .mb-16, #education .mb-16, #services .text-center.mb-16 {
+            transition: transform 0.2s ease-out;
         }
         
         .custom-cursor {
@@ -107,6 +125,21 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            animation: float-3d 4s ease-in-out infinite;
+        }
+        @keyframes float-3d {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .hero-gradient-orb {
+            background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(212, 165, 116, 0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(135, 168, 120, 0.06) 0%, transparent 40%);
+            animation: orb-pulse 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes orb-pulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
         }
         .profile-hero-img {
             width: 100%;
@@ -173,8 +206,11 @@
     </div>
 
     <!-- Hero Section -->
-    <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6">
-        <div class="max-w-6xl mx-auto text-center">
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-20 px-6 relative overflow-hidden">
+        <canvas id="hero-3d-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+        <div class="absolute inset-0 bg-gradient-to-b from-cream/90 via-cream/75 to-cream" id="hero-overlay"></div>
+        <div class="absolute inset-0 hero-gradient-orb" aria-hidden="true"></div>
+        <div class="max-w-6xl mx-auto text-center relative z-10">
             <div class="fade-in">
                 <div class="profile-hero-wrap mb-8 flex justify-center">
                     <div class="profile-hero-frame">
@@ -192,11 +228,11 @@
                     I design intuitive interfaces and meaningful user experiences that bridge the gap between human needs and business goals.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="#work" class="bg-primary text-white px-8 py-4 rounded-full font-medium hover:bg-secondary transition-all duration-300 flex items-center gap-2 group">
+                    <a href="#work" class="cta-magnetic bg-primary text-white px-8 py-4 rounded-full font-medium hover:bg-secondary transition-colors duration-300 flex items-center gap-2 group">
                         View My Work
                         <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-1 transition-transform"></i>
                     </a>
-                    <a href="#contact" class="border border-primary px-8 py-4 rounded-full font-medium hover:bg-primary hover:text-white transition-all duration-300">
+                    <a href="#contact" class="cta-magnetic border border-primary px-8 py-4 rounded-full font-medium hover:bg-primary hover:text-white transition-colors duration-300">
                         Get in Touch
                     </a>
                 </div>
@@ -347,7 +383,7 @@
             </div>
 
             <div class="space-y-12 md:space-y-16">
-                <div class="fade-in flex flex-col md:flex-row gap-6 md:gap-12">
+                <div class="fade-in scroll-3d-item flex flex-col md:flex-row gap-6 md:gap-12">
                     <div class="md:w-1/4 shrink-0">
                         <p class="text-sm text-secondary">May 2025 – Present</p>
                     </div>
@@ -358,7 +394,7 @@
                     </div>
                 </div>
 
-                <div class="fade-in flex flex-col md:flex-row gap-6 md:gap-12">
+                <div class="fade-in scroll-3d-item flex flex-col md:flex-row gap-6 md:gap-12">
                     <div class="md:w-1/4 shrink-0">
                         <p class="text-sm text-secondary">May 2024 – May 2025</p>
                     </div>
@@ -369,7 +405,7 @@
                     </div>
                 </div>
 
-                <div class="fade-in flex flex-col md:flex-row gap-6 md:gap-12">
+                <div class="fade-in scroll-3d-item flex flex-col md:flex-row gap-6 md:gap-12">
                     <div class="md:w-1/4 shrink-0">
                         <p class="text-sm text-secondary">Jan 2022 – Jun 2023</p>
                     </div>
@@ -380,7 +416,7 @@
                     </div>
                 </div>
 
-                <div class="fade-in flex flex-col md:flex-row gap-6 md:gap-12">
+                <div class="fade-in scroll-3d-item flex flex-col md:flex-row gap-6 md:gap-12">
                     <div class="md:w-1/4 shrink-0">
                         <p class="text-sm text-secondary">Jan 2021 – Jan 2022</p>
                     </div>
@@ -403,7 +439,7 @@
             </div>
 
             <div class="space-y-12 md:space-y-16">
-                <div class="fade-in flex flex-col md:flex-row gap-6 md:gap-12">
+                <div class="fade-in scroll-3d-item flex flex-col md:flex-row gap-6 md:gap-12">
                     <div class="md:w-1/4 shrink-0">
                         <p class="text-sm text-secondary">Aug 2023 – Apr 2025</p>
                     </div>
@@ -414,7 +450,7 @@
                     </div>
                 </div>
 
-                <div class="fade-in flex flex-col md:flex-row gap-6 md:gap-12">
+                <div class="fade-in scroll-3d-item flex flex-col md:flex-row gap-6 md:gap-12">
                     <div class="md:w-1/4 shrink-0">
                         <p class="text-sm text-secondary">Jun 2018 – Aug 2022</p>
                     </div>
@@ -489,19 +525,19 @@
     <section class="py-20 bg-primary text-white px-6">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="fade-in">
+                <div class="fade-in scroll-3d-item">
                     <p class="font-serif text-4xl md:text-5xl font-bold text-accent mb-2">10</p>
                     <p class="text-sm uppercase tracking-wider text-gray-400">Projects Completed</p>
                 </div>
-                <div class="fade-in" style="transition-delay: 100ms">
+                <div class="fade-in scroll-3d-item" style="transition-delay: 100ms">
                     <p class="font-serif text-4xl md:text-5xl font-bold text-accent mb-2">2</p>
                     <p class="text-sm uppercase tracking-wider text-gray-400">Certifications</p>
                 </div>
-                <div class="fade-in" style="transition-delay: 200ms">
+                <div class="fade-in scroll-3d-item" style="transition-delay: 200ms">
                     <p class="font-serif text-4xl md:text-5xl font-bold text-accent mb-2">3</p>
                     <p class="text-sm uppercase tracking-wider text-gray-400">Years Experience</p>
                 </div>
-                <div class="fade-in" style="transition-delay: 300ms">
+                <div class="fade-in scroll-3d-item" style="transition-delay: 300ms">
                     <p class="font-serif text-4xl md:text-5xl font-bold text-accent mb-2">4+</p>
                     <p class="text-sm uppercase tracking-wider text-gray-400">Design Tools
                 </div>
@@ -588,6 +624,92 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+        // ========== Scroll-triggered 3D animations ==========
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const projectCards = document.querySelectorAll('.project-card');
+            const serviceCards = document.querySelectorAll('#services .group');
+            const expItems = document.querySelectorAll('#experience .fade-in');
+            const eduItems = document.querySelectorAll('#education .fade-in');
+            const statsItems = document.querySelectorAll('.py-20.bg-primary .fade-in');
+            const sectionHeaders = document.querySelectorAll('#work .fade-in:first-child, #about .fade-in, #experience .mb-16, #education .mb-16, #services .text-center.mb-16');
+
+            const cardHovered = new WeakSet();
+            [...projectCards, ...serviceCards].forEach(card => {
+                card.addEventListener('mouseenter', () => cardHovered.add(card));
+                card.addEventListener('mouseleave', () => {
+                    cardHovered.delete(card);
+                    requestAnimationFrame(updateScroll3D);
+                });
+            });
+
+            function updateScroll3D() {
+                const vh = window.innerHeight;
+                const vhHalf = vh / 2;
+
+                projectCards.forEach((card, i) => {
+                    if (cardHovered.has(card)) return;
+                    const rect = card.getBoundingClientRect();
+                    const centerY = rect.top + rect.height / 2;
+                    const offset = (centerY - vhHalf) / vhHalf;
+                    const tilt = offset * 12;
+                    const parallaxY = offset * 30;
+                    const scale = 1 - Math.abs(offset) * 0.05;
+                    card.style.transform = `perspective(1200px) rotateX(${tilt}deg) translateY(${parallaxY}px) scale(${scale})`;
+                });
+
+                serviceCards.forEach((card, i) => {
+                    if (cardHovered.has(card)) return;
+                    const rect = card.getBoundingClientRect();
+                    const centerY = rect.top + rect.height / 2;
+                    const offset = (centerY - vhHalf) / vhHalf;
+                    const tilt = offset * 8;
+                    const parallaxY = offset * 20;
+                    const scale = 1 - Math.abs(offset) * 0.03;
+                    card.style.transform = `perspective(1200px) rotateX(${tilt}deg) translateY(${parallaxY}px) scale(${scale})`;
+                });
+
+                expItems.forEach((el, i) => {
+                    const rect = el.getBoundingClientRect();
+                    const progress = 1 - Math.min(1, (rect.top - vh * 0.2) / (vh * 0.6));
+                    const slideX = (1 - Math.min(1, progress * 1.2)) * 40 * (i % 2 === 0 ? -1 : 1);
+                    el.style.transform = `perspective(800px) translateX(${slideX}px)`;
+                });
+
+                eduItems.forEach((el, i) => {
+                    const rect = el.getBoundingClientRect();
+                    const progress = 1 - Math.min(1, (rect.top - vh * 0.2) / (vh * 0.6));
+                    const slideX = (1 - Math.min(1, progress * 1.2)) * 35 * (i % 2 === 0 ? 1 : -1);
+                    el.style.transform = `perspective(800px) translateX(${slideX}px)`;
+                });
+
+                statsItems.forEach((el, i) => {
+                    const rect = el.getBoundingClientRect();
+                    const progress = 1 - Math.min(1, (rect.top - vh * 0.3) / (vh * 0.5));
+                    const scale = progress > 0 ? 0.8 + progress * 0.2 : 0.8;
+                    el.style.transform = `perspective(600px) scale(${scale})`;
+                });
+
+                sectionHeaders.forEach((el) => {
+                    const rect = el.getBoundingClientRect();
+                    const offset = (rect.top + rect.height / 2 - vhHalf) / vhHalf;
+                    const tilt = offset * 6;
+                    el.style.transform = `perspective(1000px) rotateX(${tilt}deg)`;
+                });
+            }
+
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        updateScroll3D();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+            updateScroll3D();
+        }
+
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
         let lastScroll = 0;
@@ -645,6 +767,140 @@
                 }
             });
         });
+
+        // ========== Three.js 3D Hero Background (Award-portfolio inspired) ==========
+        (function initHero3D() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const canvas = document.getElementById('hero-3d-canvas');
+            if (!canvas || typeof THREE === 'undefined') return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            camera.position.z = 10;
+
+            const accent = new THREE.Color(0xd4a574);
+            const sage = new THREE.Color(0x87a878);
+            const primary = new THREE.Color(0x1a1a1a);
+
+            const meshes = [];
+            const shapes = [
+                { geo: new THREE.IcosahedronGeometry(0.8, 1), wireframe: true, color: accent },
+                { geo: new THREE.TorusGeometry(0.6, 0.12, 16, 48), wireframe: true, color: sage },
+                { geo: new THREE.OctahedronGeometry(0.5, 0), wireframe: false, color: accent },
+                { geo: new THREE.TetrahedronGeometry(0.6, 0), wireframe: true, color: sage },
+                { geo: new THREE.SphereGeometry(0.4, 24, 24), wireframe: false, color: primary },
+                { geo: new THREE.BoxGeometry(0.5, 0.5, 0.5), wireframe: true, color: accent },
+            ];
+
+            const positions = [
+                [-3, 1.5, -3], [2.8, -1, -4], [-2.2, -1.8, -3],
+                [2, 1.8, -2.5], [-3.2, -0.8, -4], [3, 1, -3.5]
+            ];
+
+            shapes.forEach((s, i) => {
+                const mat = s.wireframe
+                    ? new THREE.MeshBasicMaterial({ color: s.color, transparent: true, opacity: 0.6, wireframe: true })
+                    : new THREE.MeshPhongMaterial({ color: s.color, transparent: true, opacity: 0.25, shininess: 60 });
+                const mesh = new THREE.Mesh(s.geo, mat);
+                mesh.position.set(...positions[i]);
+                mesh.userData = { baseRot: { x: 0.008 + Math.random() * 0.006, y: 0.01 + Math.random() * 0.008 }, floatPhase: i * 1.2 };
+                scene.add(mesh);
+                meshes.push(mesh);
+            });
+
+            scene.add(new THREE.AmbientLight(0xffffff, 0.9));
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.5);
+            dirLight.position.set(3, 3, 5);
+            scene.add(dirLight);
+
+            let targetMouseX = 0, targetMouseY = 0;
+            let mouseX = 0, mouseY = 0;
+            document.addEventListener('mousemove', (e) => {
+                targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                targetMouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+            });
+
+            let scrollProgress = 0;
+            window.addEventListener('scroll', () => {
+                const hero = document.getElementById('hero');
+                if (!hero) return;
+                const rect = hero.getBoundingClientRect();
+                scrollProgress = Math.max(0, 1 - rect.bottom / (window.innerHeight + rect.height));
+            }, { passive: true });
+
+            const lerp = (a, b, t) => a + (b - a) * Math.min(t, 1);
+            let frame = 0;
+            function animate() {
+                requestAnimationFrame(animate);
+                frame += 0.016;
+                mouseX = lerp(mouseX, targetMouseX, 0.06);
+                mouseY = lerp(mouseY, targetMouseY, 0.06);
+
+                camera.position.x = lerp(0, mouseX * 1.5, 0.05);
+                camera.position.y = lerp(0, mouseY * 1.5, 0.05);
+                camera.position.z = 10 + scrollProgress * 3;
+                camera.lookAt(0, 0, 0);
+                camera.updateProjectionMatrix();
+
+                meshes.forEach((m, i) => {
+                    m.rotation.x += m.userData.baseRot.x + mouseY * 0.008;
+                    m.rotation.y += m.userData.baseRot.y + mouseX * 0.008;
+                    m.position.y = positions[i][1] + Math.sin(frame + m.userData.floatPhase) * 0.15;
+                });
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        })();
+
+        // ========== Magnetic CTA Buttons (Julien Renau / Rogier de Boevé style) ==========
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && window.innerWidth > 768) {
+            document.querySelectorAll('.cta-magnetic').forEach(btn => {
+                btn.style.transition = 'transform 0.3s cubic-bezier(0.23, 1, 0.32, 1)';
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width - 0.5;
+                    const y = (e.clientY - rect.top) / rect.height - 0.5;
+                    const moveX = x * 10;
+                    const moveY = y * 8;
+                    btn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0)';
+                });
+            });
+        }
+
+        // ========== 3D Tilt + Depth Shadow on Cards ==========
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.project-card, #services .group').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                const tiltX = y * 10;
+                const tiltY = -x * 10;
+                const shadowX = -tiltY * 2;
+                const shadowY = tiltX * 2 + 20;
+                card.style.transform = `perspective(1200px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+                card.style.boxShadow = `${shadowX}px ${shadowY}px 40px -10px rgba(26, 26, 26, 0.15)`;
+                card.style.transition = 'box-shadow 0.2s ease-out';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                card.style.boxShadow = '';
+                card.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease-out';
+            });
+        });
+        }
     </script>
 </body>
 </html>

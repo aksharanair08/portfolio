@@ -105,6 +105,16 @@ button:focus-visible {
     vertical-align: middle;
 }
 
+/* 3D tilt cards - preserve 3d context */
+.project-card,
+#services .group {
+    transform-style: preserve-3d;
+}
+.project-card .project-overlay,
+.project-card img {
+    transform-style: preserve-3d;
+}
+
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {
     *,
@@ -123,5 +133,12 @@ button:focus-visible {
     
     .custom-cursor {
         display: none !important;
+    }
+    
+    .profile-hero-frame {
+        animation: none !important;
+    }
+    .hero-gradient-orb {
+        animation: none !important;
     }
 }
